@@ -4,6 +4,9 @@
  */
 package app.view;
 
+import app.model.Usuario;
+import javax.swing.JPanel;
+
 /**
  *
  * @author root
@@ -15,6 +18,10 @@ public class Cliente extends javax.swing.JFrame {
      */
     public Cliente() {
         initComponents();
+    }
+
+    Cliente(Usuario usuario, JPanel jpanel) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**

@@ -10,4 +10,24 @@ package app.model;
  */
 public class Inventario {
     
+    private Integer idInventario;
+    private Integer cantidadProducto;
+
+    public Integer getIdInventario() {
+        return idInventario;
+    }
+
+    public void setIdInventario(Integer idInventario) {
+        this.idInventario = idInventario;
+    }
+
+    public Integer getCantidadProducto() {
+        return cantidadProducto;
+    }
+
+    public void setCantidadProducto(Integer cantidadProducto) {
+        this.cantidadProducto = cantidadProducto;
+    }
+    
+    
 }

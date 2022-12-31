@@ -10,4 +10,24 @@ package app.model;
  */
 public class Unidaddemedida {
     
+    private Integer idUm;
+    private String tipoDeMedida;
+
+    public Integer getIdUm() {
+        return idUm;
+    }
+
+    public void setIdUm(Integer idUm) {
+        this.idUm = idUm;
+    }
+
+    public String getTipoDeMedida() {
+        return tipoDeMedida;
+    }
+
+    public void setTipoDeMedida(String tipoDeMedida) {
+        this.tipoDeMedida = tipoDeMedida;
+    }
+    
+    
 }

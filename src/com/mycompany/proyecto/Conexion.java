@@ -19,8 +19,8 @@ public class Conexion {
 
     public Connection getConexion(){
          try{   
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbparadigmas","root","lpooMy5@l");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbparadigmas","root","admin");
             return conn;
         
         }catch(ClassNotFoundException clex){

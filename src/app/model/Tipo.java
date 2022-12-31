@@ -10,4 +10,24 @@ package app.model;
  */
 public class Tipo {
     
+    private Integer idTipo;
+    private String nombreT;
+
+    public Integer getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(Integer idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public String getNombreT() {
+        return nombreT;
+    }
+
+    public void setNombreT(String nombreT) {
+        this.nombreT = nombreT;
+    }
+    
+    
 }

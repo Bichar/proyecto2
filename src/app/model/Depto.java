@@ -11,7 +11,23 @@ package app.model;
 public class Depto {
     
     private Integer idDepto;
-    private String Nombredepto;
+    private String nombreDepto;
+
+    public Integer getIdDepto() {
+        return idDepto;
+    }
+
+    public void setIdDepto(Integer idDepto) {
+        this.idDepto = idDepto;
+    }
+
+    public String getNombreDepto() {
+        return nombreDepto;
+    }
+
+    public void setNombreDepto(String nombreDepto) {
+        this.nombreDepto = nombreDepto;
+    }
     
     
 }
