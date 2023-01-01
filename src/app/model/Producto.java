@@ -75,6 +75,14 @@ public class Producto {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
+
+    @Override
+    public String toString() {
+        return idProducto + "-" + nombre ;
+    }
+    
+    
+    
     
     
 }

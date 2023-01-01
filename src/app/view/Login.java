@@ -126,7 +126,7 @@ public class Login extends javax.swing.JPanel {
         
         }else if (usuario.getUsuario() != null && usuario.getRolId()!= 1){
              this.jpanel.removeAll();
-        jpanel.add(new Cliente (usuario, jpanel));
+        jpanel.add(new Venta (usuario, jpanel));
         jpanel.repaint();
         jpanel.revalidate();
         }
