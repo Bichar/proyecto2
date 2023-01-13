@@ -4,8 +4,8 @@
  */
 package app.view;
 
-import app.dao.TipoDao;
-import app.model.Tipos;
+import app.dao.RolDao;
+import app.model.Rol;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -16,49 +16,48 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jvazq
  */
-public class Tipo extends javax.swing.JPanel {
+public class Roles extends javax.swing.JPanel {
 
     /**
-     * Creates new form Tipo
+     * Creates new form Roles
      */
-    public Tipo() {
+    public Roles() {
         initComponents();
-        
-        ListSelectionModel cellSelectionModel = tablatipo.getSelectionModel();
+        ListSelectionModel cellSelectionModel = tablarol.getSelectionModel();
     cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-     TipoDao TipoDao = new TipoDao();
+     RolDao RolDao = new RolDao();
     
         
 cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
   public void valueChanged(ListSelectionEvent e) {
     String selectedData = null;
 
-    int[] selectedRow = tablatipo.getSelectedRows();
-    int[] selectedColumns = tablatipo.getSelectedColumns();
+    int[] selectedRow = tablarol.getSelectedRows();
+    int[] selectedColumns = tablarol.getSelectedColumns();
 
     for (int i = 0; i < selectedRow.length; i++) {
-        id.setText( tablatipo.getValueAt(selectedRow[i], 0)+"");
+        id.setText( tablarol.getValueAt(selectedRow[i], 0)+"");
         id.repaint();
-        nombretipo.setText( tablatipo.getValueAt(selectedRow[i], 1)+"");
-        nombretipo.repaint();      
+        nombrerol.setText( tablarol.getValueAt(selectedRow[i], 1)+"");
+        nombrerol.repaint();      
        
            }
     }
      });
 
- TipoDao = new TipoDao();  
-        List<Tipos> tipos=TipoDao.buscaTipos();
+ RolDao = new RolDao();  
+        List<Rol> roles=RolDao.buscaRoles();
         int row=0;
         
-        for(Tipos Tipos: tipos){
-            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
-            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
+        for(Rol Rol: roles){
+            tablarol.getModel().setValueAt(Rol.getRolId(), row, 0);
+            tablarol.getModel().setValueAt(Rol.getNombreRol(), row, 1);
            
             row++;
         }
 
-        this.tablatipo.repaint();
-        this.tablatipo.revalidate();
+        this.tablarol.repaint();
+        this.tablarol.revalidate();
     }
 
     /**
@@ -73,29 +72,23 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        nombretipo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        nombrerol = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablatipo = new javax.swing.JTable();
+        tablarol = new javax.swing.JTable();
         agregar = new javax.swing.JButton();
         modificar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
 
-        jLabel1.setText("Tipo");
+        jLabel1.setText("Roles");
 
-        jLabel2.setText("id tipo");
+        jLabel2.setText("Rol id");
 
         id.setText("id");
 
-        jLabel4.setText("nombre tipo");
+        jLabel3.setText("Nombre del Rol");
 
-        nombretipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombretipoActionPerformed(evt);
-            }
-        });
-
-        tablatipo.setModel(new javax.swing.table.DefaultTableModel(
+        tablarol.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -103,19 +96,19 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 {null, null}
             },
             new String [] {
-                "id tipo", "nombre tipo"
+                "Rol id", "Nombre rol"
             }
         ));
-        jScrollPane1.setViewportView(tablatipo);
+        jScrollPane1.setViewportView(tablarol);
 
-        agregar.setText("agregar");
+        agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
             }
         });
 
-        modificar.setText("modificar");
+        modificar.setText("Modificar");
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarActionPerformed(evt);
@@ -136,26 +129,27 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(id)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(agregar))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(nombretipo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nombrerol, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                                 .addComponent(modificar))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(agregar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(eliminar)))
@@ -164,113 +158,108 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(agregar)))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(id)
-                    .addComponent(agregar))
-                .addGap(18, 18, 18)
+                    .addComponent(id))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(nombretipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(nombrerol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modificar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(eliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombretipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombretipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombretipoActionPerformed
-
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
-        
-        TipoDao TipoDao = new TipoDao();
-      
-         
-        TipoDao.deletRegistro(
-                Integer.parseInt(id.getText()));
-      
-        
-         DefaultTableModel dm = (DefaultTableModel) tablatipo.getModel();
-int rowCount = dm.getRowCount();
-//Remove rows one by one from the end of the table
-for (int i = rowCount - 1; i >= 0; i--) {
-            tablatipo.getModel().setValueAt("", i, 0);
-            tablatipo.getModel().setValueAt("", i, 1);
-}
-        
-        
-        List<Tipos> tipos=TipoDao.buscaTipos();      
-            int row=0;
-        
-        for(Tipos Tipos: tipos){
-            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
-            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
-            row++;
-        }
-
-        this.tablatipo.repaint();
-        this.tablatipo.revalidate();
-    }//GEN-LAST:event_eliminarActionPerformed
-
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
-        
-        TipoDao TipoDao = new TipoDao();
+        RolDao RolDao = new RolDao();
       
          
-        TipoDao.insertaRegistro(
-                this.nombretipo.getText());
+        RolDao.insertaRegistro(
+                this.nombrerol.getText());
                 
       
-         List<Tipos> tipos=TipoDao.buscaTipos();
+         List<Rol> roles=RolDao.buscaRoles();
         int row=0;
         
-        for(Tipos Tipos: tipos){
-            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
-            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
+        for(Rol Rol: roles){
+            tablarol.getModel().setValueAt(Rol.getRolId(), row, 0);
+            tablarol.getModel().setValueAt(Rol.getNombreRol(), row, 1);
             
            
             row++;
         }
 
-        this.tablatipo.repaint();
-        this.tablatipo.revalidate();
+        this.tablarol.repaint();
+        this.tablarol.revalidate();
     }//GEN-LAST:event_agregarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
-        
-        TipoDao TipoDao = new TipoDao();
+        RolDao RolDao = new RolDao();
       
          
-        TipoDao.updateRegistro(
-                this.nombretipo.getText(),
+        RolDao.updateRegistro(
+                this.nombrerol.getText(),
                 Integer.parseInt(id.getText()));
       
-         List<Tipos> tipos=TipoDao.buscaTipos();
+         List<Rol> roles=RolDao.buscaRoles();
         int row=0;
         
-        for(Tipos Tipos: tipos){
-            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
-            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
+        for(Rol Rol: roles){
+            tablarol.getModel().setValueAt(Rol.getRolId(), row, 0);
+            tablarol.getModel().setValueAt(Rol.getNombreRol(), row, 1);
             
            
             row++;
         }
 
-        this.tablatipo.repaint();
-        this.tablatipo.revalidate();
-        
-        
+        this.tablarol.repaint();
+        this.tablarol.revalidate();
     }//GEN-LAST:event_modificarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+        RolDao RolDao = new RolDao();
+      
+         
+        RolDao.deletRegistro(
+                Integer.parseInt(id.getText()));
+      
+        
+         DefaultTableModel dm = (DefaultTableModel) tablarol.getModel();
+int rowCount = dm.getRowCount();
+//Remove rows one by one from the end of the table
+for (int i = rowCount - 1; i >= 0; i--) {
+            tablarol.getModel().setValueAt("", i, 0);
+            tablarol.getModel().setValueAt("", i, 1);
+}
+        
+        
+        List<Rol> roles=RolDao.buscaRoles();      
+            int row=0;
+        
+        for(Rol Rol: roles){
+            tablarol.getModel().setValueAt(Rol.getRolId(), row, 0);
+            tablarol.getModel().setValueAt(Rol.getNombreRol(), row, 1);
+            row++;
+        }
+
+        this.tablarol.repaint();
+        this.tablarol.revalidate();
+    }//GEN-LAST:event_eliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -279,10 +268,10 @@ for (int i = rowCount - 1; i >= 0; i--) {
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificar;
-    private javax.swing.JTextField nombretipo;
-    private javax.swing.JTable tablatipo;
+    private javax.swing.JTextField nombrerol;
+    private javax.swing.JTable tablarol;
     // End of variables declaration//GEN-END:variables
 }

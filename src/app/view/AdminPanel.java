@@ -49,35 +49,26 @@ public class AdminPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         panelCentral = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        departamentos = new javax.swing.JButton();
+        unidadMedida = new javax.swing.JButton();
+        tipo = new javax.swing.JButton();
+        roles = new javax.swing.JButton();
 
         jLabel1.setText("Admin panel");
-
-        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
         panelCentral.setLayout(panelCentralLayout);
         panelCentralLayout.setHorizontalGroup(
             panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCentralLayout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 756, Short.MAX_VALUE)
         );
         panelCentralLayout.setVerticalGroup(
             panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCentralLayout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(jLabel2)
-                .addContainerGap(211, Short.MAX_VALUE))
+            .addGap(0, 388, Short.MAX_VALUE)
         );
 
         jButton1.setText("Usuarios");
@@ -101,28 +92,33 @@ public class AdminPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("jLabel3");
-
         jLabel4.setText("catalogos");
 
-        jButton4.setText("Departamentos");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        departamentos.setText("Departamentos");
+        departamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                departamentosActionPerformed(evt);
             }
         });
 
-        jButton5.setText("unididad de medida");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        unidadMedida.setText("unididad de medida");
+        unidadMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                unidadMedidaActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Tipo");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        tipo.setText("Tipo");
+        tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                tipoActionPerformed(evt);
+            }
+        });
+
+        roles.setText("Roles");
+        roles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rolesActionPerformed(evt);
             }
         });
 
@@ -135,27 +131,31 @@ public class AdminPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)
-                                .addGap(24, 24, 24)
-                                .addComponent(jButton2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
-                                .addGap(221, 221, 221)
+                                .addGap(33, 33, 33))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(departamentos)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(272, 272, 272)
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6)))))
+                                .addGap(9, 9, 9)
+                                .addComponent(unidadMedida)
+                                .addGap(18, 18, 18)
+                                .addComponent(tipo)
+                                .addGap(18, 18, 18)
+                                .addComponent(roles)))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -163,24 +163,22 @@ public class AdminPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)))
+                            .addComponent(jButton3)
+                            .addComponent(jButton2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton5)
-                                .addComponent(jButton6)))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(unidadMedida)
+                            .addComponent(tipo)
+                            .addComponent(departamentos)
+                            .addComponent(roles))))
                 .addGap(40, 40, 40)
                 .addComponent(panelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -218,30 +216,53 @@ public class AdminPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void departamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departamentosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        this.panelCentral.removeAll();
+        panelCentral.setLayout(new CardLayout (0,0));
+        panelCentral.add(new Depto());
+        panelCentral.repaint();
+        panelCentral.revalidate();
+    }//GEN-LAST:event_departamentosActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void unidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadMedidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        this.panelCentral.removeAll();
+        panelCentral.setLayout(new CardLayout (0,0));
+        panelCentral.add(new UnidaddeMed());
+        panelCentral.repaint();
+        panelCentral.revalidate();
+    }//GEN-LAST:event_unidadMedidaActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        this.panelCentral.removeAll();
+        panelCentral.setLayout(new CardLayout (0,0));
+        panelCentral.add(new Tipo());
+        panelCentral.repaint();
+        panelCentral.revalidate();
+    }//GEN-LAST:event_tipoActionPerformed
+
+    private void rolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolesActionPerformed
+        // TODO add your handling code here:
+        this.panelCentral.removeAll();
+        panelCentral.setLayout(new CardLayout (0,0));
+        panelCentral.add(new Roles());
+        panelCentral.repaint();
+        panelCentral.revalidate();
+    }//GEN-LAST:event_rolesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton departamentos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel panelCentral;
+    private javax.swing.JButton roles;
+    private javax.swing.JButton tipo;
+    private javax.swing.JButton unidadMedida;
     // End of variables declaration//GEN-END:variables
 }

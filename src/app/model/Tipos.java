@@ -8,7 +8,7 @@ package app.model;
  *
  * @author root
  */
-public class Tipo {
+public class Tipos {
     
     private Integer idTipo;
     private String nombreT;

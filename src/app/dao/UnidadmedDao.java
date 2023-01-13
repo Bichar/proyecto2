@@ -4,8 +4,7 @@
  */
 package app.dao;
 
-;
-import app.model.Detalleventa;
+import app.model.Unidaddemedida;
 import com.mycompany.proyecto.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,30 +18,26 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 
+ * @author jvazq
  */
-public class DetallesVentaDao {
+public class UnidadmedDao {
     
-  
-     public List<Detalleventa> buscaVentas( ){ 
+     public List<Unidaddemedida> buscaUnidades( ){ 
         Conexion conexion = new Conexion();
      Connection  con = conexion.getConexion();
-      List<Detalleventa> ventas= new ArrayList<>();
+      List<Unidaddemedida> unidades= new ArrayList<>();
      
          Statement st;
         try {
             st = con.createStatement();
             
-            ResultSet rs = st.executeQuery("SELECT * FROM dbparadigmas.detallesventa ");
+            ResultSet rs = st.executeQuery("SELECT * FROM dbparadigmas.unidaddemedida ");
             System.out.println("Conexión establecida.");
             while(rs.next()){
-              Detalleventa detalleventaObj = new Detalleventa();
-              detalleventaObj.setDetalleId(rs.getInt("detalle_id"));
-              detalleventaObj.setCostoTotal(rs.getInt("Costototal"));
-              detalleventaObj.setCantidadProducto(rs.getInt("CantidadPrducto"));
-              detalleventaObj.setVentaId(rs.getInt("venta_id"));
-              detalleventaObj.setIdProducto(rs.getInt("id_producto"));
-               ventas.add(detalleventaObj);
+              Unidaddemedida UnidaddemedidaObj = new Unidaddemedida();
+              UnidaddemedidaObj.setIdUm(rs.getInt("id_um"));
+              UnidaddemedidaObj.setTipoDeMedida(rs.getString("tipo de medida"));
+               unidades.add(UnidaddemedidaObj);
             }
             st.close();
             con.close();
@@ -50,25 +45,21 @@ public class DetallesVentaDao {
             } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
          }
-        return ventas;
+        return unidades;
     }
-    public int insertaRegistro( Integer Costototal, Integer CantidadProducto, Integer VentaId, Integer IdProducto){
+    public int insertaRegistro( String TipodeMedida){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
      int resultado=0;
           
         try {
-            PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`detallesventa`\n" +
-                                                        "(`Costototal`,`CantidadPrducto`,`venta_id`,`id_producto`) " +
-                                                        "VALUES ( ?,?,?,?)");
+            PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`unidaddemedida`\n" +
+                                                        "(`tipo de medida`) " +
+                                                        "VALUES ( ?)");
            
-             ps.setInt(1,Costototal);
-             ps.setInt(2,CantidadProducto);
-             ps.setInt(3,VentaId);
-             ps.setInt(4,IdProducto);
-                        
-             ps.executeUpdate();
+             ps.setString(1,TipodeMedida);
+                         ps.executeUpdate();
              ps.close();
              con.close();
              
@@ -78,7 +69,8 @@ public class DetallesVentaDao {
         return resultado;
     }
     
-    public int updateRegistro( Integer Costototal, Integer cantidadproducto, Integer ventaid, Integer idproducto, Integer detalleid){
+    
+    public int updateRegistro( String TipodeMedida,Integer idUm){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -86,20 +78,13 @@ public class DetallesVentaDao {
      int resultado=0;
           
         try {
-            PreparedStatement ps= con.prepareStatement("UPDATE `dbparadigmas`.`detallesventa`\n" +
+            PreparedStatement ps= con.prepareStatement("UPDATE `dbparadigmas`.`unidaddemedida`\n" +
                         "SET " +
-                        "`Costototal` = ?," +
-                        "`CantidadPrducto` = ?, " +
-                        "`venta_id` = ?, " +
-                        "`id_producto` = ? " +
-                        "WHERE `detalle_id` = ?");
+                         "`tipo de medida` = ?  " +
+                        "WHERE `id_um` = ?");
            
-             ps.setInt(1,Costototal);
-             ps.setInt(2,cantidadproducto);
-             ps.setInt(3,ventaid);
-             ps.setInt(4,idproducto);
-             ps.setInt(5,detalleid);
- 
+             ps.setString(1,TipodeMedida);
+             ps.setInt(2,idUm);
             
              
             resultado =  ps.executeUpdate();
@@ -113,7 +98,7 @@ public class DetallesVentaDao {
         return resultado;
     }
     
-    public int deletRegistro(Integer idUsuario){
+    public int deletRegistro(Integer idUm){
         Conexion conexion = new Conexion();
      Connection  con = conexion.getConexion();
      
@@ -121,10 +106,10 @@ public class DetallesVentaDao {
      int resultado=0;
           
         try {
-            PreparedStatement ps= con.prepareStatement("DELETE FROM `dbparadigmas`.`detallesventa` \n" +
-                "WHERE `detalle_id` = ? ");
+            PreparedStatement ps= con.prepareStatement("DELETE FROM `dbparadigmas`.`unidaddemedida` \n" +
+                "WHERE `id_um` = ? ");
            
-            ps.setInt(1,idUsuario);
+            ps.setInt(1,idUm);
               
             resultado =  ps.executeUpdate();
               ps.close();
@@ -136,5 +121,4 @@ public class DetallesVentaDao {
          }
         return resultado;
     }
-    
 }

@@ -5,9 +5,7 @@
 package app.view;
 
 import app.dao.DetallesVentaDao;
-import app.dao.UserDao;
 import app.model.Detalleventa;
-import app.model.Usuario;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -41,14 +39,14 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
     for (int i = 0; i < selectedRow.length; i++) {
         id.setText( tablaventas.getValueAt(selectedRow[i], 0)+"");
         id.repaint();
-        ventaid.setText( tablaventas.getValueAt(selectedRow[i], 1)+"");
-        ventaid.repaint();      
-        productoid.setText( tablaventas.getValueAt(selectedRow[i], 2)+"");
-        productoid.repaint();
-        cantidad.setText(tablaventas.getValueAt(selectedRow[i], 3)+"");
+        costototal.setText( tablaventas.getValueAt(selectedRow[i], 1)+"");
+        costototal.repaint();      
+        cantidad.setText( tablaventas.getValueAt(selectedRow[i], 2)+"");
         cantidad.repaint();
-        costototal.setText(tablaventas.getValueAt(selectedRow[i], 4)+"");
-        costototal.repaint();
+        ventaid.setText(tablaventas.getValueAt(selectedRow[i], 3)+"");
+        ventaid.repaint();
+        productoid.setText(tablaventas.getValueAt(selectedRow[i], 4)+"");
+        productoid.repaint();
        
     }
     }
@@ -59,11 +57,11 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         int row=0;
         
         for(Detalleventa Detalleventa: detalles){
-     tablaventas.getModel().setValueAt(Detalleventa.getDetalleId(), row, 0);
-            tablaventas.getModel().setValueAt(Detalleventa.getVentaId(), row, 1);
-            tablaventas.getModel().setValueAt(Detalleventa.getIdProducto(), row, 2);
-            tablaventas.getModel().setValueAt(Detalleventa.getCantidadProducto(), row, 3);
-            tablaventas.getModel().setValueAt(Detalleventa.getCostoTotal(), row, 4);
+            tablaventas.getModel().setValueAt(Detalleventa.getDetalleId(), row, 0);
+            tablaventas.getModel().setValueAt(Detalleventa.getCostoTotal(), row, 1);
+            tablaventas.getModel().setValueAt(Detalleventa.getCantidadProducto(), row, 2);
+            tablaventas.getModel().setValueAt(Detalleventa.getVentaId(), row, 3);
+            tablaventas.getModel().setValueAt(Detalleventa.getIdProducto(), row, 4);
            
            
             row++;
@@ -97,6 +95,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         cantidad = new javax.swing.JTextField();
         costototal = new javax.swing.JTextField();
         id = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Detalles Ventas ");
 
@@ -108,7 +107,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 {null, null, null, null, null}
             },
             new String [] {
-                "detalle id ", "venta id ", "producto id ", "cantidad ", "costo total"
+                "detalle id ", "costo total ", "cantidad", "venta id", "producto id"
             }
         ));
         jScrollPane1.setViewportView(tablaventas);
@@ -151,6 +150,13 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 
         id.setText("id");
 
+        jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,6 +165,8 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(modificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(eliminar))
@@ -211,12 +219,13 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(costototal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eliminar)
-                    .addComponent(modificar))
+                    .addComponent(modificar)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -230,10 +239,10 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         DetallesVentaDao.updateRegistro(
                
                 
-                Integer.parseInt(this.cantidad.getText()),
                 Integer.parseInt(this.costototal.getText()),
-                Integer.parseInt(this.productoid.getText()),
+                Integer.parseInt(this.cantidad.getText()),
                 Integer.parseInt(this.ventaid.getText()),
+                Integer.parseInt(this.productoid.getText()),
                 
                 Integer.parseInt(id.getText()));
       
@@ -241,11 +250,11 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         int row=0;
         
          for(Detalleventa Detalleventa: detalles){
-     tablaventas.getModel().setValueAt(Detalleventa.getDetalleId(), row, 0);
-            tablaventas.getModel().setValueAt(Detalleventa.getVentaId(), row, 1);
-            tablaventas.getModel().setValueAt(Detalleventa.getIdProducto(), row, 2);
-            tablaventas.getModel().setValueAt(Detalleventa.getCantidadProducto(), row, 3);
-            tablaventas.getModel().setValueAt(Detalleventa.getCostoTotal(), row, 4);
+            tablaventas.getModel().setValueAt(Detalleventa.getDetalleId(), row, 0);
+            tablaventas.getModel().setValueAt(Detalleventa.getCostoTotal(), row, 1);
+            tablaventas.getModel().setValueAt(Detalleventa.getCantidadProducto(), row, 2);
+            tablaventas.getModel().setValueAt(Detalleventa.getVentaId(), row, 3);
+            tablaventas.getModel().setValueAt(Detalleventa.getIdProducto(), row, 4);
            
            
             row++;
@@ -291,11 +300,11 @@ for (int i = rowCount - 1; i >= 0; i--) {
         int row=0;
         
         for(Detalleventa Detalleventa: detalles){
-     tablaventas.getModel().setValueAt(Detalleventa.getDetalleId(), row, 0);
-            tablaventas.getModel().setValueAt(Detalleventa.getVentaId(), row, 1);
-            tablaventas.getModel().setValueAt(Detalleventa.getIdProducto(), row, 2);
-            tablaventas.getModel().setValueAt(Detalleventa.getCantidadProducto(), row, 3);
-            tablaventas.getModel().setValueAt(Detalleventa.getCostoTotal(), row, 4);
+           tablaventas.getModel().setValueAt(Detalleventa.getDetalleId(), row, 0);
+            tablaventas.getModel().setValueAt(Detalleventa.getCostoTotal(), row, 1);
+            tablaventas.getModel().setValueAt(Detalleventa.getCantidadProducto(), row, 2);
+            tablaventas.getModel().setValueAt(Detalleventa.getVentaId(), row, 3);
+            tablaventas.getModel().setValueAt(Detalleventa.getIdProducto(), row, 4);
            
             row++;
         }
@@ -304,12 +313,44 @@ for (int i = rowCount - 1; i >= 0; i--) {
         this.tablaventas.revalidate();
     }//GEN-LAST:event_eliminarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DetallesVentaDao DetallesVentaDao = new DetallesVentaDao();
+      
+         
+        DetallesVentaDao.insertaRegistro(
+               
+                
+                Integer.parseInt(this.costototal.getText()),
+                Integer.parseInt(this.cantidad.getText()),
+                Integer.parseInt(this.ventaid.getText()),
+                Integer.parseInt(this.productoid.getText()));
+                
+          List<Detalleventa> detalles=DetallesVentaDao.buscaVentas();
+        int row=0;
+        
+         for(Detalleventa Detalleventa: detalles){
+            tablaventas.getModel().setValueAt(Detalleventa.getDetalleId(), row, 0);
+            tablaventas.getModel().setValueAt(Detalleventa.getCostoTotal(), row, 1);
+            tablaventas.getModel().setValueAt(Detalleventa.getCantidadProducto(), row, 2);
+            tablaventas.getModel().setValueAt(Detalleventa.getVentaId(), row, 3);
+            tablaventas.getModel().setValueAt(Detalleventa.getIdProducto(), row, 4);
+           
+           
+            row++;
+        }
+
+        this.tablaventas.repaint();
+        this.tablaventas.revalidate();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cantidad;
     private javax.swing.JTextField costototal;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel id;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -5,9 +5,9 @@
 package app.view;
 
 import app.dao.ProductoDao;
-import app.dao.UserDao;
+
 import app.model.Producto;
-import app.model.Usuario;
+
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
