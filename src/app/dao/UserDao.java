@@ -30,10 +30,10 @@ public class UserDao {
          Statement st;
         try {
             st = con.createStatement();
-            
+                     
             ResultSet rs = st.executeQuery("SELECT * FROM dbparadigmas.usuarios where usuario = '"+usuario+"' and Contrasena ='"+ password+"'");
             System.out.println("Conexión establecida.");
-            while(rs.next()){
+            while(rs.next()){           
               usuarioObj.setApellidoMa(rs.getString("apellidoMa"));
               usuarioObj.setApellidoPa(rs.getString("apellidoPa"));
               usuarioObj.setIdUsuario(rs.getInt("id_usuario"));
@@ -46,6 +46,7 @@ public class UserDao {
             con.close();
             
             } catch (SQLException ex) {
+              ex.printStackTrace();
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
          }
         return usuarioObj;

@@ -114,7 +114,7 @@ public class NewJInternalFrameLogin extends javax.swing.JInternalFrame {
         Usuario usuario= userDao.buscaUsuario(this.user.getText(),String.valueOf(this.password.getPassword()));
 
       
-        if (usuario.getUsuario() != null && usuario.getRolId()== 1){
+        if (usuario.getUsuario() != null ){
              System.out.println("Usuario::::::"+usuario.getNombre());
              frame.setUsuarioLogeado(usuario);
              this.dispose();

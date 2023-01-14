@@ -5,23 +5,15 @@
 package app.view;
 
 import app.dao.DetallesVentaDao;
-import app.dao.ProductoDao;
 import app.model.Detalleventa;
 import app.model.Producto;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -33,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentaPublico extends javax.swing.JInternalFrame {
 
-    private JFrame main;
+    private FerreBicha main;
     private Integer rowSeleccionado;
 
     /**
@@ -46,9 +38,11 @@ public class VentaPublico extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentaPublico
      */
-    public VentaPublico(JFrame main) {
+    public VentaPublico(FerreBicha main) {
         initComponents();
         this.main = main;
+        
+        this.nombre.setText(main.getUsuarioLogeado().getNombre());
 
         tableDetalle.setRowSelectionAllowed(true);
         //tableDetalle.setCellSelectionEnabled(true);
@@ -86,7 +80,7 @@ public class VentaPublico extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        vendedorNombre = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDetalle = new javax.swing.JTable();
         agregarProducto = new javax.swing.JButton();
@@ -99,6 +93,7 @@ public class VentaPublico extends javax.swing.JInternalFrame {
         botonEliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        nombre = new javax.swing.JLabel();
 
         setClosable(true);
         setResizable(true);
@@ -106,18 +101,16 @@ public class VentaPublico extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Vendedor:");
 
-        jLabel2.setText("Vendedor:");
-
         tableDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "cve", "producto", "unidad", "precio unitario", "cantidad", "total"
+                "id", "cve", "producto", "unidad", "precio unitario", "cantidad", "total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,6 +168,8 @@ public class VentaPublico extends javax.swing.JInternalFrame {
             }
         });
 
+        nombre.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,8 +183,10 @@ public class VentaPublico extends javax.swing.JInternalFrame {
                         .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(nombre)
+                        .addGap(93, 93, 93)
+                        .addComponent(vendedorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -217,7 +214,8 @@ public class VentaPublico extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(vendedorNombre)
+                    .addComponent(nombre))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregarProducto)
@@ -248,16 +246,20 @@ public class VentaPublico extends javax.swing.JInternalFrame {
 
     private void agregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarProductoActionPerformed
         // TODO add your handling code here:
+        
+        
         Producto p = new Producto();
         AgregaProducto ap = new AgregaProducto(this.main, true, p);
 
         ap.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-               
+               if(ap.getProductoSleccionado() == null){
+        
                 DefaultTableModel model = (DefaultTableModel) tableDetalle.getModel();
 
                 Vector row = new Vector();
+                row.add(ap.getProductoSleccionado().getIdProducto());
                 row.add(ap.getProductoSleccionado().getCve());
                 row.add(ap.getProductoSleccionado().getNombre());
                 row.add(ap.getProductoSleccionado().getUnidaMedida());
@@ -272,11 +274,13 @@ public class VentaPublico extends javax.swing.JInternalFrame {
                 tableDetalle.repaint();
                 tableDetalle.revalidate();
 
+                }
             }
         });
 
         p = ap.showDialog();
-
+        
+        
         //  ap.setVisible(true);
 
     }//GEN-LAST:event_agregarProductoActionPerformed
@@ -317,8 +321,9 @@ public class VentaPublico extends javax.swing.JInternalFrame {
         
         for (int i = 0; i < tableDetalle.getRowCount(); i++) {  // Loop through the rows
             Detalleventa detalleventa= new Detalleventa();
-            detalleventa.setCantidadProducto(Integer.valueOf(tableDetalle.getValueAt(i, 4).toString()));
-            detalleventa.setCostoTotal(Float.valueOf(tableDetalle.getValueAt(i, 5).toString()));
+            detalleventa.setCantidadProducto(Integer.valueOf(tableDetalle.getValueAt(i, 5).toString()));
+            detalleventa.setCostoTotal(Float.valueOf(tableDetalle.getValueAt(i, 6).toString()));
+            detalleventa.setIdProducto(Integer.valueOf(tableDetalle.getValueAt(i, 0).toString()));
             detalleVentaList.add(detalleventa);
             
         }
@@ -326,8 +331,24 @@ public class VentaPublico extends javax.swing.JInternalFrame {
             Float sub= Float.valueOf(this.subtotal.getText());
             Float iva=  Float.valueOf(this.iva.getText());
             Float total= Float.valueOf(this.total.getText());
+        try{
+        detallesVentaDao.insertaVenta(total, iva, sub, main.getUsuarioLogeado().getIdUsuario(), detalleVentaList);
         
-        detallesVentaDao.insertaVenta(total, iva, sub, WIDTH, detalleVentaList);
+        
+        JOptionPane.showMessageDialog(this,
+        "La venta se guardo correctamente.");
+        
+            this.dispose();
+        
+        }catch(Exception e){
+    e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+    "Ocurrio un error al guardar la venta.",
+    "Error",
+    JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -360,7 +381,7 @@ public class VentaPublico extends javax.swing.JInternalFrame {
         Float subtotal = 0f;
         //recorre la tabla y suma la columna 5 y lo acumula en la var subtotal
         for (int i = 0; i < tableDetalle.getRowCount(); i++) {  // Loop through the rows
-            subtotal += Float.valueOf(tableDetalle.getValueAt(i, 5).toString());
+            subtotal += Float.valueOf(tableDetalle.getValueAt(i, 6).toString());
         }
 
         System.out.println("subtotal: " + String.valueOf(subtotal));
@@ -381,13 +402,14 @@ public class VentaPublico extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel nombre;
     private javax.swing.JTextField subtotal;
     private javax.swing.JTable tableDetalle;
     private javax.swing.JTextField total;
+    private javax.swing.JLabel vendedorNombre;
     // End of variables declaration//GEN-END:variables
 }

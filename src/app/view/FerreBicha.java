@@ -5,6 +5,7 @@
 package app.view;
 
 import app.model.Usuario;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -29,13 +30,14 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
     public FerreBicha() {
         initComponents();
         jMenuBar1.setVisible(false);
+        infoUser.setVisible(false);
         NewJInternalFrameLogin login = new NewJInternalFrameLogin(this);
         
         login.setVisible(true);
         this.jDesktopPane1.add(login);
        login.addInternalFrameListener(this); 
         
-        
+       
         
     }
 
@@ -49,12 +51,14 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        infoUser = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         userLogName = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuAdmin = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -66,27 +70,55 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
 
         userLogName.setText("User:");
 
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(userLogName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout infoUserLayout = new javax.swing.GroupLayout(infoUser);
+        infoUser.setLayout(infoUserLayout);
+        infoUserLayout.setHorizontalGroup(
+            infoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(infoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(infoUserLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton1))
+                    .addComponent(userLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        infoUserLayout.setVerticalGroup(
+            infoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(infoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(userLogName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
+
+        jDesktopPane1.setLayer(infoUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(1719, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(userLogName, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(0, 1706, Short.MAX_VALUE)
+                .addComponent(infoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(userLogName))
-                .addGap(0, 913, Short.MAX_VALUE))
+                .addComponent(infoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 869, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Ventas");
@@ -101,7 +133,7 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Administracion");
+        menuAdmin.setText("Administracion");
 
         jMenuItem1.setText("Usuarios");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +141,7 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menuAdmin.add(jMenuItem1);
 
         jMenu3.setText("Catalogos");
 
@@ -121,7 +153,7 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
         });
         jMenu3.add(jMenuItem2);
 
-        jMenu2.add(jMenu3);
+        menuAdmin.add(jMenu3);
 
         jMenuItem4.setText("Inventario");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -129,9 +161,9 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        menuAdmin.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuAdmin);
 
         setJMenuBar(jMenuBar1);
 
@@ -182,6 +214,19 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        jMenuBar1.setVisible(false);
+        infoUser.setVisible(false);
+        NewJInternalFrameLogin login = new NewJInternalFrameLogin(this);
+        
+        login.setVisible(true);
+        this.jDesktopPane1.add(login);
+       login.addInternalFrameListener(this);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,16 +274,18 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel infoUser;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu menuAdmin;
     private javax.swing.JLabel userLogName;
     // End of variables declaration//GEN-END:variables
 
@@ -257,9 +304,16 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
     @Override
     public void internalFrameClosed(InternalFrameEvent e) {
    
-        System.out.println("fff"+this.usuarioLogeado.getNombre() );
         this.jMenuBar1.setVisible(true);
         this.userLogName.setText(this.usuarioLogeado.getNombre());
+        infoUser.setVisible(true);
+        
+        if( this.usuarioLogeado.getRolId() != 1 ){
+            menuAdmin.setVisible(false);
+        }else{
+            menuAdmin.setVisible(true);
+        }
+        
     
     }
 
