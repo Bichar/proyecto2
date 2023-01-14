@@ -58,7 +58,7 @@ public class ProductoDao {
          }
         return productos;
     }
-    public int insertaRegistro( String nombre, Integer precio, Integer cantidad, String area, String tipo, String unidadMedida, String clave, String descripcion){
+    public int insertaRegistro( String nombre, Float precio, Integer cantidad, String area, String tipo, String unidadMedida, String clave, String descripcion){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -66,11 +66,11 @@ public class ProductoDao {
           
         try {
             PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`producto`\n" +
-                                                        "(`nombre`, `precio`,`cantidad`,`area`,`tipo`,`unidadMedida`,`clave`,`descripcion`) " +
+                                                        "(`nombre`, `precio`,`cantidad`,`area`,`tipo`,`unidadMedida`,`cve`,`descripcion`) " +
                                                         "VALUES ( ?,?,?,?,?,?,?,?)");
            
              ps.setString(1,nombre);
-             ps.setInt(2,precio);
+             ps.setFloat(2,precio);
              ps.setInt(3,cantidad );
              ps.setString(4,area);
              ps.setString(5,tipo);
@@ -89,7 +89,7 @@ public class ProductoDao {
     }
     
     
-    public int updateRegistro( String nombre, Integer precio, Integer cantidad, String area, String tipo, String unidadMedida, String clave, String descripcion, Integer idproducto){
+    public int updateRegistro( String nombre, Float precio, Integer cantidad, String area, String tipo, String unidadMedida, String clave, String descripcion, Integer idproducto){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -104,13 +104,13 @@ public class ProductoDao {
                         "`cantidad` = ?, " +
                         "`area` = ? , " +
                         "`tipo` = ? , " +
-                        "`unidadMedida` = ?  " +
-                        "`clave` = ?  " +
-                        "`descricpion` = ?  " +
+                        "`unidadMedida` = ?,  " +
+                        "`cve` = ? , " +
+                        "`descripcion` = ?  " +
                         "WHERE `idproducto` = ?");
            
             ps.setString(1,nombre);
-             ps.setInt(2,precio);
+             ps.setFloat(2,precio);
              ps.setInt(3,cantidad );
              ps.setString(4,area);
              ps.setString(5,tipo);

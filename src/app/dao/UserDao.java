@@ -80,7 +80,7 @@ public class UserDao {
          }
         return usuarios;
     }
-    public int insertaRegistro( String apellidoMa, String apellidoPa, String nombre, Integer rolId, String usuario,String password){
+    public int insertaRegistro( String apellidoMa, String apellidoPa, String nombre, Integer rolId, String usuario,String password) throws java.sql.SQLIntegrityConstraintViolationException{
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -102,9 +102,11 @@ public class UserDao {
              ps.close();
              con.close();
              
+            }catch(java.sql.SQLIntegrityConstraintViolationException v){
+                throw v;
             } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-         }
+                    Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         return resultado;
     }
     

@@ -151,14 +151,17 @@ public class FerreBicha extends javax.swing.JFrame implements ActionListener, In
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        CatalogoUnidadesDeMedida cum= new CatalogoUnidadesDeMedida();
-        cum.setTitle("Unidades de medida");
-        cum.setVisible(true);
-        this.jDesktopPane1.add(cum);
+       
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+         NewJInternalFrameUsuarios cum= new NewJInternalFrameUsuarios();
+        cum.setTitle("Catalogos Usuarios");
+        cum.setVisible(true);
+        this.jDesktopPane1.add(cum);
+        
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

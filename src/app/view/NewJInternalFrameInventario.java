@@ -7,6 +7,8 @@ package app.view;
 import app.dao.ProductoDao;
 import app.model.Producto;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -42,14 +44,14 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         nombre.repaint();      
         cantidad.setText( tablainventario.getValueAt(selectedRow[i], 2)+"");
         cantidad.repaint();
-        area.setText(tablainventario.getValueAt(selectedRow[i], 3)+"");
-        area.repaint();
-        tipo.setText(tablainventario.getValueAt(selectedRow[i], 4)+"");
-        tipo.repaint();
-        unidad.setText(tablainventario.getValueAt(selectedRow[i], 5)+"");
-        unidad.repaint();
-        precio.setText(tablainventario.getValueAt(selectedRow[i], 6)+"");
+        precio.setText(tablainventario.getValueAt(selectedRow[i], 3)+"");
         precio.repaint();
+        area.setText(tablainventario.getValueAt(selectedRow[i], 4)+"");
+        area.repaint();
+        tipo.setText(tablainventario.getValueAt(selectedRow[i], 5)+"");
+        tipo.repaint();
+        unidad.setText(tablainventario.getValueAt(selectedRow[i], 6)+"");
+        unidad.repaint();
         clave.setText(tablainventario.getValueAt(selectedRow[i], 7)+"");
         clave.repaint();
         descripcion.setText(tablainventario.getValueAt(selectedRow[i], 8)+"");
@@ -123,6 +125,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 
         jButton3.setText("jButton3");
 
+        setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablainventario.setBackground(new java.awt.Color(255, 204, 153));
@@ -140,7 +143,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         tablainventario.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tablainventario);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 790, 140));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 790, 140));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 102));
 
@@ -176,90 +179,69 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 70));
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel3.setText("idproducto");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 0, -1, 18));
 
         nombrer.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         nombrer.setText("Nombre");
+        jPanel2.add(nombrer, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 24, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel5.setText("Cantidad");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 56, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel6.setText("Precio");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 88, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel7.setText("Area");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 114, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel8.setText("Tipo");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 146, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel9.setText("Unidad de medida");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 178, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel10.setText("Clave");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 216, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel11.setText("Descripcion");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 258, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 56, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nombrer, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nombrer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11))
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 170, 250));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 170, 310));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 153));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nombre.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 31, 300, -1));
 
         cantidad.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.add(cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 60, 300, -1));
 
         precio.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 88, 300, -1));
 
         area.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.add(area, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 116, 300, -1));
 
         tipo.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 144, 300, -1));
 
         unidad.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.add(unidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 178, 300, -1));
 
         id.setText("id");
+        jPanel3.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, -1, -1));
 
         agregar.setBackground(new java.awt.Color(255, 204, 153));
         agregar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
@@ -269,6 +251,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 agregarActionPerformed(evt);
             }
         });
+        jPanel3.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 31, 89, -1));
 
         modificar.setBackground(new java.awt.Color(255, 204, 153));
         modificar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
@@ -278,6 +261,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 modificarActionPerformed(evt);
             }
         });
+        jPanel3.add(modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 102, -1, -1));
 
         eliminar.setBackground(new java.awt.Color(255, 204, 153));
         eliminar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
@@ -287,6 +271,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 eliminarActionPerformed(evt);
             }
         });
+        jPanel3.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 206, 89, -1));
 
         clave.setBackground(new java.awt.Color(255, 204, 153));
         clave.addActionListener(new java.awt.event.ActionListener() {
@@ -294,64 +279,12 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
                 claveActionPerformed(evt);
             }
         });
+        jPanel3.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 218, 300, -1));
 
         descripcion.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 258, 300, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(clave, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(id, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombre, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cantidad, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(precio, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(area, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tipo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(unidad, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(agregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(id)
-                .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(agregar))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(area, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(unidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(eliminar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 620, 250));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 620, 310));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -363,12 +296,45 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
         
+        
+        if(
+                this.nombre.getText().isBlank()
+                ||this.precio.getText().isBlank()
+                ||this.cantidad.getText().isBlank() 
+                ||this.area.getText().isBlank() 
+                ||this.tipo.getText().isBlank()
+                ||this.unidad.getText().isBlank()
+                ||this.clave.getText().isBlank()
+                ||this.descripcion.getText().isBlank()
+                ){
+        String message = "No dejar campos en blanco";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+        JOptionPane.ERROR_MESSAGE);
+        
+        }else{
+        
+        try{
+            Float.parseFloat(this.precio.getText());
+         }catch(NumberFormatException nfe){
+           String message = "el precio debe ser numerico";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+        JOptionPane.ERROR_MESSAGE);
+         }
+        
+        try{
+           Integer.parseInt(this.cantidad.getText());
+         }catch(NumberFormatException nfe){
+           String message = "La cantidad debe ser numerico";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+        JOptionPane.ERROR_MESSAGE);
+         }    
+            
         ProductoDao ProductoDao = new ProductoDao();
       
          
         ProductoDao.insertaRegistro(
                 this.nombre.getText(),
-                Integer.parseInt(this.precio.getText()),
+                Float.parseFloat(this.precio.getText()),
                 Integer.parseInt(this.cantidad.getText()), 
                 this.area.getText(), 
                 this.tipo.getText(),
@@ -395,16 +361,49 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 
         this.tablainventario.repaint();
         this.tablainventario.revalidate();
+        }
     }//GEN-LAST:event_agregarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
+        
+        if(
+                this.nombre.getText().isBlank()
+                ||this.precio.getText().isBlank()
+                ||this.cantidad.getText().isBlank() 
+                ||this.area.getText().isBlank() 
+                ||this.tipo.getText().isBlank()
+                ||this.unidad.getText().isBlank()
+                ||this.clave.getText().isBlank()
+                ||this.descripcion.getText().isBlank()
+                ){
+        String message = "No dejar campos en blanco";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+        JOptionPane.ERROR_MESSAGE);
+        
+        }else{
+        
+        try{
+            Float.parseFloat(this.precio.getText());
+         }catch(NumberFormatException nfe){
+           String message = "el precio debe ser numerico";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+        JOptionPane.ERROR_MESSAGE);
+         }
+        
+        try{
+           Integer.parseInt(this.cantidad.getText());
+         }catch(NumberFormatException nfe){
+           String message = "La cantidad debe ser numerico";
+    JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+        JOptionPane.ERROR_MESSAGE);
+         }
         ProductoDao ProductoDao = new ProductoDao();
       
          
         ProductoDao.updateRegistro(
                 this.nombre.getText(),
-                Integer.parseInt(this.precio.getText()),
+                Float.parseFloat(this.precio.getText()),
                 Integer.parseInt(this.cantidad.getText()), 
                 this.area.getText(), 
                 this.tipo.getText(),
@@ -432,6 +431,7 @@ cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
 
         this.tablainventario.repaint();
         this.tablainventario.revalidate();
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
