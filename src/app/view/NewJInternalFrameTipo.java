@@ -4,6 +4,14 @@
  */
 package app.view;
 
+import app.dao.TipoDao;
+import app.model.Tipos;
+import java.util.List;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jvazq
@@ -15,6 +23,62 @@ public class NewJInternalFrameTipo extends javax.swing.JInternalFrame {
      */
     public NewJInternalFrameTipo() {
         initComponents();
+        
+         ListSelectionModel cellSelectionModel = tablatipo.getSelectionModel();
+    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+     TipoDao TipoDao = new TipoDao();
+    
+        
+cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+  public void valueChanged(ListSelectionEvent e) {
+    String selectedData = null;
+
+    int[] selectedRow = tablatipo.getSelectedRows();
+    int[] selectedColumns = tablatipo.getSelectedColumns();
+
+    for (int i = 0; i < selectedRow.length; i++) {
+        id.setText( tablatipo.getValueAt(selectedRow[i], 0)+"");
+        id.repaint();
+        nombre.setText( tablatipo.getValueAt(selectedRow[i], 1)+"");
+        nombre.repaint();      
+        dureza.setText( tablatipo.getValueAt(selectedRow[i], 2)+"");
+        dureza.repaint();
+        flexibilidad.setText(tablatipo.getValueAt(selectedRow[i], 3)+"");
+        flexibilidad.repaint();
+        conduccioncalor.setText(tablatipo.getValueAt(selectedRow[i], 4)+"");
+        conduccioncalor.repaint();
+        resistenciafrio.setText(tablatipo.getValueAt(selectedRow[i], 5)+"");
+        resistenciafrio.repaint();
+        conduccionelect.setText(tablatipo.getValueAt(selectedRow[i], 6)+"");
+        conduccionelect.repaint();
+        resistenciaexte.setText(tablatipo.getValueAt(selectedRow[i], 7)+"");
+        resistenciaexte.repaint();
+        
+    }
+    }
+     });
+
+ TipoDao = new TipoDao();  
+        List<Tipos> tipos=TipoDao.buscaTipos();
+        int row=0;
+        
+        for(Tipos Tipos: tipos){
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
+            tablatipo.getModel().setValueAt(Tipos.getDureza(), row, 2);
+            tablatipo.getModel().setValueAt(Tipos.getFlexibilidad(), row, 3);
+            tablatipo.getModel().setValueAt(Tipos.getConducalor(), row, 4);
+            tablatipo.getModel().setValueAt(Tipos.getResistenciafrio(), row, 5);
+            tablatipo.getModel().setValueAt(Tipos.getConduelect(), row, 6);
+            tablatipo.getModel().setValueAt(Tipos.getResistenciaexte(), row, 7);
+            
+           
+           
+            row++;
+        }
+
+        this.tablatipo.repaint();
+        this.tablatipo.revalidate();
     }
 
     /**
@@ -51,7 +115,7 @@ public class NewJInternalFrameTipo extends javax.swing.JInternalFrame {
         resistenciaexte = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
         dureza = new javax.swing.JTextField();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -200,14 +264,29 @@ public class NewJInternalFrameTipo extends javax.swing.JInternalFrame {
         jButton1.setBackground(new java.awt.Color(153, 204, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(153, 204, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(153, 204, 255));
-        jButton3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        jButton3.setText("Eliminar");
+        eliminar.setBackground(new java.awt.Color(153, 204, 255));
+        eliminar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         dureza.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -229,7 +308,7 @@ public class NewJInternalFrameTipo extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(63, 63, 63))
         );
@@ -253,7 +332,7 @@ public class NewJInternalFrameTipo extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(resistenciafrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(eliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(conduccionelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,16 +353,135 @@ public class NewJInternalFrameTipo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_resistenciaexteActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        TipoDao TipoDao = new TipoDao();
+      
+         
+        TipoDao.insertaRegistro(
+                this.nombre.getText(),
+                this.dureza.getText(),
+                this.flexibilidad.getText(),
+                this.conduccioncalor.getText(),
+                this.resistenciafrio.getText(),
+                this.conduccionelect.getText(),
+                this.resistenciaexte.getText());
+                
+      
+         List<Tipos> tipos=TipoDao.buscaTipos();
+        int row=0;
+        
+        for(Tipos Tipos: tipos){
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 2);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 3);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 4);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 5);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 6);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 7);
+            
+           
+            row++;
+        }
+
+        this.tablatipo.repaint();
+        this.tablatipo.revalidate();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        TipoDao TipoDao = new TipoDao();
+      
+         
+        TipoDao.updateRegistro(
+                this.nombre.getText(),
+                this.dureza.getText(),
+                this.flexibilidad.getText(),
+                this.conduccioncalor.getText(),
+                this.resistenciafrio.getText(),
+                this.conduccionelect.getText(),
+                this.resistenciaexte.getText(),
+                Integer.parseInt(id.getText()));
+      
+         List<Tipos> tipos=TipoDao.buscaTipos();
+        int row=0;
+        
+        for(Tipos Tipos: tipos){
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 2);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 3);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 4);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 5);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 6);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 7);
+            
+           
+            row++;
+        }
+
+        this.tablatipo.repaint();
+        this.tablatipo.revalidate();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+        
+        TipoDao TipoDao = new TipoDao();
+      
+         
+        TipoDao.deletRegistro(
+                Integer.parseInt(id.getText()));
+      
+        
+         DefaultTableModel dm = (DefaultTableModel) tablatipo.getModel();
+int rowCount = dm.getRowCount();
+//Remove rows one by one from the end of the table
+for (int i = rowCount - 1; i >= 0; i--) {
+            tablatipo.getModel().setValueAt("", i, 0);
+            tablatipo.getModel().setValueAt("", i, 1);
+             tablatipo.getModel().setValueAt("", i, 2);
+            tablatipo.getModel().setValueAt("", i, 3);
+             tablatipo.getModel().setValueAt("", i, 4);
+            tablatipo.getModel().setValueAt("", i, 5);
+             tablatipo.getModel().setValueAt("", i, 6);
+            tablatipo.getModel().setValueAt("", i, 7);
+            
+            List<Tipos> tipos=TipoDao.buscaTipos();
+        int row=0;
+        
+        for(Tipos Tipos: tipos){
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 0);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 1);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 2);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 3);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 4);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 5);
+            tablatipo.getModel().setValueAt(Tipos.getIdTipo(), row, 6);
+            tablatipo.getModel().setValueAt(Tipos.getNombreT(), row, 7);
+            
+           
+            row++;
+        }
+
+        this.tablatipo.repaint();
+        this.tablatipo.revalidate();
+}     
+    }//GEN-LAST:event_eliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField conduccioncalor;
     private javax.swing.JTextField conduccionelect;
     private javax.swing.JTextField dureza;
+    private javax.swing.JButton eliminar;
     private javax.swing.JTextField flexibilidad;
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

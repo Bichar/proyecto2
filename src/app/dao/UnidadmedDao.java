@@ -37,6 +37,11 @@ public class UnidadmedDao {
               Unidaddemedida UnidaddemedidaObj = new Unidaddemedida();
               UnidaddemedidaObj.setIdUm(rs.getInt("id_um"));
               UnidaddemedidaObj.setTipoDeMedida(rs.getString("tipo de medida"));
+              UnidaddemedidaObj.setUnidadmaxima(rs.getString("unidadmaxima"));
+              UnidaddemedidaObj.setUnidadminima(rs.getString("unidadminima"));
+              UnidaddemedidaObj.setLugarmed(rs.getString("lugarmed"));
+              UnidaddemedidaObj.setFechareg(rs.getString("fechareg"));
+              UnidaddemedidaObj.setAreaentrega(rs.getString("areaentrega"));
                unidades.add(UnidaddemedidaObj);
             }
             st.close();
@@ -47,7 +52,7 @@ public class UnidadmedDao {
          }
         return unidades;
     }
-    public int insertaRegistro( String TipodeMedida){
+    public int insertaRegistro( String TipodeMedida, String Unidamaxima, String Unidadminima, String Lugarmed, String Fechareg, String Areaentrega){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -55,10 +60,15 @@ public class UnidadmedDao {
           
         try {
             PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`unidaddemedida`\n" +
-                                                        "(`tipo de medida`) " +
+                                                        "(`tipo de medida`,`unidadmaxima,`unidadminima`,`lugarmed`,`fechareg`,`areaentrega`) " +
                                                         "VALUES ( ?)");
            
              ps.setString(1,TipodeMedida);
+             ps.setString(2,Unidamaxima);
+             ps.setString(3,Unidadminima);
+             ps.setString(4,Lugarmed);
+             ps.setString(5,Fechareg);
+             ps.setString(6,Areaentrega);
                          ps.executeUpdate();
              ps.close();
              con.close();
@@ -70,7 +80,7 @@ public class UnidadmedDao {
     }
     
     
-    public int updateRegistro( String TipodeMedida,Integer idUm){
+    public int updateRegistro( String TipodeMedida,String Unidamaxima, String Unidadminima, String Lugarmed, String Fechareg, String Areaentrega,Integer idUm){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -80,11 +90,21 @@ public class UnidadmedDao {
         try {
             PreparedStatement ps= con.prepareStatement("UPDATE `dbparadigmas`.`unidaddemedida`\n" +
                         "SET " +
-                         "`tipo de medida` = ?  " +
+                         "`tipo de medida` = ? , " +
+                    "`unidadmaxima` = ? , " +
+                    "`unidadminima` = ? , " +
+                    "`lugarmed` = ? , " +
+                    "`fechareg` = ? , " +
+                    "`areaentrega` = ?  " +
                         "WHERE `id_um` = ?");
            
              ps.setString(1,TipodeMedida);
-             ps.setInt(2,idUm);
+             ps.setString(2,Unidamaxima);
+             ps.setString(3,Unidadminima);
+             ps.setString(4,Lugarmed);
+             ps.setString(5,Fechareg);
+             ps.setString(6,Areaentrega);
+             ps.setInt(7,idUm);
             
              
             resultado =  ps.executeUpdate();

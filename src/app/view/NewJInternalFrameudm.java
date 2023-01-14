@@ -4,6 +4,14 @@
  */
 package app.view;
 
+import app.dao.UnidadmedDao;
+import app.model.Unidaddemedida;
+import java.util.List;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jvazq
@@ -15,6 +23,58 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
      */
     public NewJInternalFrameudm() {
         initComponents();
+        
+        ListSelectionModel cellSelectionModel = tablaudm.getSelectionModel();
+    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+     UnidadmedDao UnidadmedDao = new UnidadmedDao();
+     //DeptoDao deptodao = new DeptoDao();
+        
+cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+  public void valueChanged(ListSelectionEvent e) {
+    String selectedData = null;
+
+    int[] selectedRow = tablaudm.getSelectedRows();
+    int[] selectedColumns = tablaudm.getSelectedColumns();
+
+    for (int i = 0; i < selectedRow.length; i++) {
+         id.setText( tablaudm.getValueAt(selectedRow[i], 0)+"");
+        id.repaint();
+        nombre.setText( tablaudm.getValueAt(selectedRow[i], 1)+"");
+        nombre.repaint();
+        unidadmax.setText( tablaudm.getValueAt(selectedRow[i], 2)+"");
+        unidadmax.repaint();
+        unidadmini.setText( tablaudm.getValueAt(selectedRow[i], 3)+"");
+        unidadmini.repaint();
+        lugarmed.setText( tablaudm.getValueAt(selectedRow[i], 4)+"");
+        lugarmed.repaint();
+        fechareg.setText( tablaudm.getValueAt(selectedRow[i], 5)+"");
+        fechareg.repaint();
+        areaentrega.setText( tablaudm.getValueAt(selectedRow[i], 6)+"");
+        areaentrega.repaint();
+        
+
+    }
+    }
+     });
+
+ UnidadmedDao = new UnidadmedDao();  
+        List<Unidaddemedida> unidades=UnidadmedDao.buscaUnidades();
+        int row=0;
+        
+        for(Unidaddemedida Unidaddemedida: unidades){
+            tablaudm.getModel().setValueAt(Unidaddemedida.getIdUm(), row, 0);
+            tablaudm.getModel().setValueAt(Unidaddemedida.getTipoDeMedida(), row, 1);
+            tablaudm.getModel().setValueAt(Unidaddemedida.getUnidadmaxima(), row, 2);
+            tablaudm.getModel().setValueAt(Unidaddemedida.getUnidadminima(), row, 3);
+            tablaudm.getModel().setValueAt(Unidaddemedida.getLugarmed(), row, 4);
+            tablaudm.getModel().setValueAt(Unidaddemedida.getFechareg(), row, 5);
+            tablaudm.getModel().setValueAt(Unidaddemedida.getAreaentrega(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaudm.repaint();
+        this.tablaudm.revalidate();
     }
 
     /**
@@ -30,7 +90,7 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaudm = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -43,13 +103,13 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        id = new javax.swing.JLabel();
+        areaentrega = new javax.swing.JTextField();
+        fechareg = new javax.swing.JTextField();
+        lugarmed = new javax.swing.JTextField();
+        unidadmini = new javax.swing.JTextField();
+        unidadmax = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -65,8 +125,8 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, -1));
 
-        jTable1.setBackground(new java.awt.Color(255, 204, 204));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaudm.setBackground(new java.awt.Color(255, 204, 204));
+        tablaudm.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -77,7 +137,7 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
                 "id udm", "nombre", "unidad maxima ", "unidad minima", "lugar de medicion", "fecha de registro"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaudm);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 290, 790, 180));
 
@@ -145,28 +205,43 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
         jButton1.setBackground(new java.awt.Color(255, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 153, 153));
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 153, 153));
         jButton3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setText("id");
+        id.setText("id");
 
-        jTextField6.setBackground(new java.awt.Color(255, 153, 153));
+        areaentrega.setBackground(new java.awt.Color(255, 153, 153));
 
-        jTextField5.setBackground(new java.awt.Color(255, 153, 153));
+        fechareg.setBackground(new java.awt.Color(255, 153, 153));
 
-        jTextField4.setBackground(new java.awt.Color(255, 153, 153));
+        lugarmed.setBackground(new java.awt.Color(255, 153, 153));
 
-        jTextField3.setBackground(new java.awt.Color(255, 153, 153));
+        unidadmini.setBackground(new java.awt.Color(255, 153, 153));
 
-        jTextField2.setBackground(new java.awt.Color(255, 153, 153));
+        unidadmax.setBackground(new java.awt.Color(255, 153, 153));
 
-        jTextField1.setBackground(new java.awt.Color(255, 153, 153));
+        nombre.setBackground(new java.awt.Color(255, 153, 153));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -177,10 +252,10 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fechareg, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lugarmed, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(unidadmini, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -189,18 +264,18 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
                         .addGap(34, 34, 34))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(id)
+                            .addComponent(areaentrega, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(unidadmax, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jLabel7)
+                .addComponent(id)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -211,17 +286,17 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
                         .addComponent(jButton3)
                         .addGap(18, 18, 18))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(unidadmax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(unidadmini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lugarmed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fechareg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)))
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(areaentrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -230,8 +305,122 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        UnidadmedDao UnidadmedDao = new UnidadmedDao();
+      
+         
+        UnidadmedDao.insertaRegistro(
+               
+                this.nombre.getText(),
+                this.unidadmax.getText(),
+                this.unidadmini.getText(),
+                this.lugarmed.getText(),
+                this.fechareg.getText(), 
+                this.areaentrega.getText());
+      
+         List<Unidaddemedida> unidades=UnidadmedDao.buscaUnidades();
+        int row=0;
+        
+        for(Unidaddemedida unidaddemedida: unidades){
+            tablaudm.getModel().setValueAt(unidaddemedida.getIdUm(), row, 0);
+            tablaudm.getModel().setValueAt(unidaddemedida.getTipoDeMedida(), row, 1);
+            tablaudm.getModel().setValueAt(unidaddemedida.getUnidadmaxima(), row, 2);
+            tablaudm.getModel().setValueAt(unidaddemedida.getUnidadminima(), row, 3);
+            tablaudm.getModel().setValueAt(unidaddemedida.getLugarmed(), row, 4);
+            tablaudm.getModel().setValueAt(unidaddemedida.getFechareg(), row, 5);
+            tablaudm.getModel().setValueAt(unidaddemedida.getAreaentrega(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaudm.repaint();
+        this.tablaudm.revalidate();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        UnidadmedDao UnidadmedDao = new UnidadmedDao();
+      
+         
+        UnidadmedDao.updateRegistro(
+               
+                this.nombre.getText(),
+                this.unidadmax.getText(),
+                this.unidadmini.getText(),
+                this.lugarmed.getText(),
+                this.fechareg.getText(), 
+                this.areaentrega.getText(),
+                Integer.parseInt(id.getText()));
+      
+         List<Unidaddemedida> unidades=UnidadmedDao.buscaUnidades();
+        int row=0;
+        
+        for(Unidaddemedida unidaddemedida: unidades){
+            tablaudm.getModel().setValueAt(unidaddemedida.getIdUm(), row, 0);
+            tablaudm.getModel().setValueAt(unidaddemedida.getTipoDeMedida(), row, 1);
+            tablaudm.getModel().setValueAt(unidaddemedida.getUnidadmaxima(), row, 2);
+            tablaudm.getModel().setValueAt(unidaddemedida.getUnidadminima(), row, 3);
+            tablaudm.getModel().setValueAt(unidaddemedida.getLugarmed(), row, 4);
+            tablaudm.getModel().setValueAt(unidaddemedida.getFechareg(), row, 5);
+            tablaudm.getModel().setValueAt(unidaddemedida.getAreaentrega(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaudm.repaint();
+        this.tablaudm.revalidate();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        UnidadmedDao UnidadmedDao = new UnidadmedDao();
+      
+         
+        UnidadmedDao.deletRegistro(
+                Integer.parseInt(id.getText()));
+        
+         DefaultTableModel dm = (DefaultTableModel) tablaudm.getModel();
+int rowCount = dm.getRowCount();
+//Remove rows one by one from the end of the table
+for (int i = rowCount - 1; i >= 0; i--) {
+     tablaudm.getModel().setValueAt("", i, 0);
+            tablaudm.getModel().setValueAt("", i, 1);
+            tablaudm.getModel().setValueAt("", i, 2);
+            tablaudm.getModel().setValueAt("", i, 3);
+            tablaudm.getModel().setValueAt("", i, 4);
+            tablaudm.getModel().setValueAt("", i, 5);
+            tablaudm.getModel().setValueAt("", i, 6);
+        
+            
+    List<Unidaddemedida> unidades=UnidadmedDao.buscaUnidades();
+        int row=0;
+        
+        for(Unidaddemedida unidaddemedida: unidades){
+            tablaudm.getModel().setValueAt(unidaddemedida.getIdUm(), row, 0);
+            tablaudm.getModel().setValueAt(unidaddemedida.getTipoDeMedida(), row, 1);
+            tablaudm.getModel().setValueAt(unidaddemedida.getUnidadmaxima(), row, 2);
+            tablaudm.getModel().setValueAt(unidaddemedida.getUnidadminima(), row, 3);
+            tablaudm.getModel().setValueAt(unidaddemedida.getLugarmed(), row, 4);
+            tablaudm.getModel().setValueAt(unidaddemedida.getFechareg(), row, 5);
+            tablaudm.getModel().setValueAt(unidaddemedida.getAreaentrega(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaudm.repaint();
+        this.tablaudm.revalidate();
+} 
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField areaentrega;
+    private javax.swing.JTextField fechareg;
+    private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -242,19 +431,16 @@ public class NewJInternalFrameudm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lugarmed;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JTable tablaudm;
+    private javax.swing.JTextField unidadmax;
+    private javax.swing.JTextField unidadmini;
     // End of variables declaration//GEN-END:variables
 }
