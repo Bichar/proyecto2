@@ -11,10 +11,12 @@ package app.model;
 public class Detalleventa {
     
     private Integer detalleId;
-    private Integer costoTotal;
+    private Float costoTotal;
     private Integer cantidadProducto;
     private Integer ventaId;
     private Integer idProducto;
+    private String fechaventa;
+    private String nombrevende;
 
     public Integer getDetalleId() {
         return detalleId;
@@ -24,13 +26,15 @@ public class Detalleventa {
         this.detalleId = detalleId;
     }
 
-    public Integer getCostoTotal() {
+    public Float getCostoTotal() {
         return costoTotal;
     }
 
-    public void setCostoTotal(Integer costoTotal) {
+    public void setCostoTotal(Float costoTotal) {
         this.costoTotal = costoTotal;
     }
+
+  
 
     public Integer getCantidadProducto() {
         return cantidadProducto;
@@ -55,6 +59,23 @@ public class Detalleventa {
     public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
     }
+
+    public String getFechaventa() {
+        return fechaventa;
+    }
+
+    public void setFechaventa(String fechaventa) {
+        this.fechaventa = fechaventa;
+    }
+
+    public String getNombrevende() {
+        return nombrevende;
+    }
+
+    public void setNombrevende(String nombrevende) {
+        this.nombrevende = nombrevende;
+    }
+    
     
     
 }

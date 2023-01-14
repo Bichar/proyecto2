@@ -13,11 +13,12 @@ public class Producto {
     private Integer idProducto;
     private String nombre;
     private String cve;
-    private Integer precio;
+    private Float precio;
     private Integer cantidad;
     private String area;
     private String tipo;
     private String unidaMedida;
+    private String clave;
     private String descripcion;
 
     public String getArea() {
@@ -62,13 +63,15 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Integer getPrecio() {
+    public Float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Integer precio) {
+    public void setPrecio(Float precio) {
         this.precio = precio;
     }
+
+   
 
     public Integer getCantidad() {
         return cantidad;
@@ -100,9 +103,13 @@ public class Producto {
     public String toString() {
         return idProducto + "-" + nombre ;
     }
-    
-    
-    
-    
-    
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+   
 }

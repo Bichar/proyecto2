@@ -20,7 +20,7 @@ public class Conexion {
     public Connection getConexion(){
          try{   
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/dbparadigmas","root","admin");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://4.tcp.ngrok.io:11583/dbparadigmas","newuser","adminadmin2022");
             return conn;
         
         }catch(ClassNotFoundException clex){

@@ -37,6 +37,12 @@ public class DeptoDao {
               Deptos DeptoObj = new Deptos();
               DeptoObj.setIdDepto(rs.getInt("id_depto"));
               DeptoObj.setNombreDepto(rs.getString("nombreDepto"));
+              DeptoObj.setPasillo(rs.getInt("pasillo"));
+              DeptoObj.setProveedores(rs.getString("proveedores"));
+              DeptoObj.setProdmas(rs.getString("prodmas"));
+              DeptoObj.setUltifecha(rs.getString("ultifecha"));
+              DeptoObj.setProdesca(rs.getString("prodesca"));
+              DeptoObj.setProdexis(rs.getString("prodexis"));
                deptos.add(DeptoObj);
             }
             st.close();
@@ -47,7 +53,7 @@ public class DeptoDao {
          }
         return deptos;
     }
-    public int insertaRegistro( String nombreDepto){
+    public int insertaRegistro( String nombreDepto, Integer Pasillo, String Proveedores, String Prodmas, String Ultifecha, String Prodesca, String Prodexis){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -55,10 +61,16 @@ public class DeptoDao {
           
         try {
             PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`departamento`\n" +
-                                                        "(`nombreDepto`) " +
-                                                        "VALUES ( ?)");
+                                                        "(`nombreDepto`,`pasillo`,`proveedores`,`prodmas`,`ultifecha`,`prodesca`,`prodexis`) " +
+                                                        "VALUES ( ?,?,?,?,?,?,?)");
            
              ps.setString(1,nombreDepto);
+             ps.setInt(2,Pasillo);
+             ps.setString(3,Proveedores);
+             ps.setString(4,Prodmas);
+             ps.setString(5,Ultifecha);
+             ps.setString(6,Prodesca);
+             ps.setString(7,Prodexis);
                          ps.executeUpdate();
              ps.close();
              con.close();
@@ -70,7 +82,7 @@ public class DeptoDao {
     }
     
     
-    public int updateRegistro( String nombreDepto,Integer idDepto){
+    public int updateRegistro( String nombreDepto,Integer Pasillo, String Proveedores, String Prodmas, String Ultifecha, String Prodesca, String Prodexis,Integer idDepto){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -80,11 +92,23 @@ public class DeptoDao {
         try {
             PreparedStatement ps= con.prepareStatement("UPDATE `dbparadigmas`.`departamento`\n" +
                         "SET " +
-                         "`nombreDepto` = ?  " +
+                         "`nombreDepto` = ?,  " +
+                         "`pasillo` = ?,  " +
+                        "`proveedores` = ?, " +
+                        "`prodmas` = ?,  " +
+                        "`ultifecha` = ?, " +
+                        "`prodesca` = ?, " +
+                        "`prodexis` = ?  " +
                         "WHERE `id_depto` = ?");
            
              ps.setString(1,nombreDepto);
-             ps.setInt(2,idDepto);
+             ps.setInt(2,Pasillo);
+             ps.setString(3,Proveedores);
+             ps.setString(4,Prodmas);
+             ps.setString(5,Ultifecha);
+             ps.setString(6,Prodesca);
+             ps.setString(7,Prodexis);
+             ps.setInt(8,idDepto);
             
              
             resultado =  ps.executeUpdate();

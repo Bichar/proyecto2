@@ -37,6 +37,12 @@ public class TipoDao {
               Tipos TipoObj = new Tipos();
               TipoObj.setIdTipo(rs.getInt("id_tipo"));
               TipoObj.setNombreT(rs.getString("nombreT"));
+              TipoObj.setDureza(rs.getString("dureza"));
+              TipoObj.setFlexibilidad(rs.getString("flexibilidad"));
+              TipoObj.setConducalor(rs.getString("conducalor"));
+              TipoObj.setResistenciafrio(rs.getString("resistenciafrio"));
+              TipoObj.setConduelect(rs.getString("conduelect"));
+              TipoObj.setResistenciaexte(rs.getString("resistenciaexte"));
                tipos.add(TipoObj);
             }
             st.close();
@@ -47,7 +53,7 @@ public class TipoDao {
          }
         return tipos;
     }
-    public int insertaRegistro( String nombreT){
+    public int insertaRegistro( String nombreT,String Dureza, String Flexibilidad, String Conducalor,String Resistenciafrio, String conduelect, String Resistenciaexte){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -55,10 +61,16 @@ public class TipoDao {
           
         try {
             PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`tipo`\n" +
-                                                        "(`nombreT`) " +
-                                                        "VALUES ( ?)");
+                                                        "(`nombreT`,`dureza`,`flexibilidad`,`conducalor`,`resistenciafrio`,`conduelect`,`resistenciaexte`) " +
+                                                        "VALUES ( ?,?,?,?,?,?,?)");
            
              ps.setString(1,nombreT);
+             ps.setString(2,Dureza);
+             ps.setString(3,Flexibilidad);
+             ps.setString(4,Conducalor);
+             ps.setString(5,Resistenciafrio);
+             ps.setString(6,conduelect);
+             ps.setString(7,Resistenciaexte);
                          ps.executeUpdate();
              ps.close();
              con.close();
@@ -70,7 +82,7 @@ public class TipoDao {
     }
     
     
-    public int updateRegistro( String nombreT,Integer idTipo){
+    public int updateRegistro( String nombreT,String Dureza, String Flexibilidad, String Conducalor,String Resistenciafrio, String conduelect, String Resistenciaexte,Integer idTipo){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -80,11 +92,23 @@ public class TipoDao {
         try {
             PreparedStatement ps= con.prepareStatement("UPDATE `dbparadigmas`.`tipo`\n" +
                         "SET " +
-                         "`nombreT` = ?  " +
+                         "`nombreT` = ? , " +
+                    "`dureza` = ? , " +
+                    "`flexibilidad` = ? , " +
+                    "`conducalor` = ? , " +
+                    "`resistenciafrio` = ? , " +
+                    "`conduelect` = ? , " +
+                    "`resistenciaexte` = ?  " +
                         "WHERE `id_tipo` = ?");
            
              ps.setString(1,nombreT);
-             ps.setInt(2,idTipo);
+             ps.setString(2,Dureza);
+             ps.setString(3,Flexibilidad);
+             ps.setString(4,Conducalor);
+             ps.setString(5,Resistenciafrio);
+             ps.setString(6,conduelect);
+             ps.setString(7,Resistenciaexte);
+             ps.setInt(8,idTipo);
             
              
             resultado =  ps.executeUpdate();

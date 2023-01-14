@@ -95,7 +95,7 @@ public class Login extends javax.swing.JPanel {
         
         if (usuario.getUsuario() != null && usuario.getRolId()== 1){
             this.jpanel.removeAll();
-        jpanel.add(new AdminPanel (usuario, jpanel));
+//        jpanel.add(new AdminPanel (usuario, jpanel));
         jpanel.repaint();
         jpanel.revalidate();
         

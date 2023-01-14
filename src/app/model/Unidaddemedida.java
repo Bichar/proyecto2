@@ -12,6 +12,11 @@ public class Unidaddemedida {
     
     private Integer idUm;
     private String tipoDeMedida;
+    private String unidadmaxima;
+    private String unidadminima;
+    private String lugarmed;
+    private String fechareg;
+    private String areaentrega;
 
     public Integer getIdUm() {
         return idUm;
@@ -28,6 +33,47 @@ public class Unidaddemedida {
     public void setTipoDeMedida(String tipoDeMedida) {
         this.tipoDeMedida = tipoDeMedida;
     }
+
+    public String getUnidadmaxima() {
+        return unidadmaxima;
+    }
+
+    public void setUnidadmaxima(String unidadmaxima) {
+        this.unidadmaxima = unidadmaxima;
+    }
+
+    public String getUnidadminima() {
+        return unidadminima;
+    }
+
+    public void setUnidadminima(String unidadminima) {
+        this.unidadminima = unidadminima;
+    }
+
+    public String getLugarmed() {
+        return lugarmed;
+    }
+
+    public void setLugarmed(String lugarmed) {
+        this.lugarmed = lugarmed;
+    }
+
+    public String getFechareg() {
+        return fechareg;
+    }
+
+    public void setFechareg(String fechareg) {
+        this.fechareg = fechareg;
+    }
+
+    public String getAreaentrega() {
+        return areaentrega;
+    }
+
+    public void setAreaentrega(String areaentrega) {
+        this.areaentrega = areaentrega;
+    }
+    
     
     
 }
