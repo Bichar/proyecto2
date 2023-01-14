@@ -4,6 +4,14 @@
  */
 package app.view;
 
+import app.dao.UserDao;
+import app.model.Usuario;
+import java.util.List;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jvazq
@@ -15,6 +23,58 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
      */
     public NewJInternalFrameUsuarios() {
         initComponents();
+        
+         ListSelectionModel cellSelectionModel = tablaUsuarios.getSelectionModel();
+    cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+     UserDao userDao = new UserDao();
+     //DeptoDao deptodao = new DeptoDao();
+        
+cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+  public void valueChanged(ListSelectionEvent e) {
+    String selectedData = null;
+
+    int[] selectedRow = tablaUsuarios.getSelectedRows();
+    int[] selectedColumns = tablaUsuarios.getSelectedColumns();
+
+    for (int i = 0; i < selectedRow.length; i++) {
+        
+        nombre.setText( tablaUsuarios.getValueAt(selectedRow[i], 0)+"");
+        nombre.repaint();
+        ApellidoPa.setText( tablaUsuarios.getValueAt(selectedRow[i], 1)+"");
+        ApellidoPa.repaint();
+        ApellidoMa.setText( tablaUsuarios.getValueAt(selectedRow[i], 2)+"");
+        ApellidoMa.repaint();
+        Contrasena.setText( tablaUsuarios.getValueAt(selectedRow[i], 3)+"");
+        Contrasena.repaint();
+        Rol.setText( tablaUsuarios.getValueAt(selectedRow[i], 4)+"");
+        Rol.repaint();
+        Usuario.setText( tablaUsuarios.getValueAt(selectedRow[i], 5)+"");
+        Usuario.repaint();
+        id.setText( tablaUsuarios.getValueAt(selectedRow[i], 6)+"");
+        id.repaint();
+
+    }
+    }
+     });
+
+ userDao = new UserDao();  
+        List<Usuario> usuarios=userDao.buscaUsuarios();
+        int row=0;
+        
+        for(Usuario usuario: usuarios){
+            tablaUsuarios.getModel().setValueAt(usuario.getNombre(), row, 0);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoPa(), row, 1);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoMa(), row, 2);
+            tablaUsuarios.getModel().setValueAt(usuario.getContrasena(), row, 3);
+            tablaUsuarios.getModel().setValueAt(usuario.getRolId(), row, 4);
+            tablaUsuarios.getModel().setValueAt(usuario.getUsuario(), row, 5);
+            tablaUsuarios.getModel().setValueAt(usuario.getIdUsuario(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaUsuarios.repaint();
+        this.tablaUsuarios.revalidate();
     }
 
     /**
@@ -35,20 +95,20 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        apellidopa = new javax.swing.JTextField();
+        id = new javax.swing.JLabel();
+        ApellidoPa = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
-        apellidoma = new javax.swing.JTextField();
-        rol = new javax.swing.JTextField();
-        usuario = new javax.swing.JTextField();
-        contraseña = new javax.swing.JTextField();
+        ApellidoMa = new javax.swing.JTextField();
+        Rol = new javax.swing.JTextField();
+        Usuario = new javax.swing.JTextField();
+        Contrasena = new javax.swing.JTextField();
         actualizar = new javax.swing.JButton();
         crear = new javax.swing.JButton();
         borrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablausuarios = new javax.swing.JTable();
+        tablaUsuarios = new javax.swing.JTable();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -88,12 +148,12 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel9.setText("id");
+        id.setText("id");
 
-        apellidopa.setBackground(new java.awt.Color(204, 204, 255));
-        apellidopa.addActionListener(new java.awt.event.ActionListener() {
+        ApellidoPa.setBackground(new java.awt.Color(204, 204, 255));
+        ApellidoPa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apellidopaActionPerformed(evt);
+                ApellidoPaActionPerformed(evt);
             }
         });
 
@@ -104,45 +164,60 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        apellidoma.setBackground(new java.awt.Color(204, 204, 255));
-        apellidoma.addActionListener(new java.awt.event.ActionListener() {
+        ApellidoMa.setBackground(new java.awt.Color(204, 204, 255));
+        ApellidoMa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apellidomaActionPerformed(evt);
+                ApellidoMaActionPerformed(evt);
             }
         });
 
-        rol.setBackground(new java.awt.Color(204, 204, 255));
-        rol.addActionListener(new java.awt.event.ActionListener() {
+        Rol.setBackground(new java.awt.Color(204, 204, 255));
+        Rol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rolActionPerformed(evt);
+                RolActionPerformed(evt);
             }
         });
 
-        usuario.setBackground(new java.awt.Color(204, 204, 255));
-        usuario.addActionListener(new java.awt.event.ActionListener() {
+        Usuario.setBackground(new java.awt.Color(204, 204, 255));
+        Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioActionPerformed(evt);
+                UsuarioActionPerformed(evt);
             }
         });
 
-        contraseña.setBackground(new java.awt.Color(204, 204, 255));
-        contraseña.addActionListener(new java.awt.event.ActionListener() {
+        Contrasena.setBackground(new java.awt.Color(204, 204, 255));
+        Contrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contraseñaActionPerformed(evt);
+                ContrasenaActionPerformed(evt);
             }
         });
 
         actualizar.setBackground(new java.awt.Color(204, 204, 255));
         actualizar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         actualizar.setText("Actualizar");
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
 
         crear.setBackground(new java.awt.Color(204, 204, 255));
         crear.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         crear.setText("Crear");
+        crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearActionPerformed(evt);
+            }
+        });
 
         borrar.setBackground(new java.awt.Color(204, 204, 255));
         borrar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         borrar.setText("Borrar");
+        borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarActionPerformed(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/imagenes/icons8-usuario-30.png"))); // NOI18N
 
@@ -159,17 +234,17 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(106, 106, 106))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(rol, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(apellidoma, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Rol, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ApellidoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(apellidopa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ApellidoPa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,37 +259,37 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel9))
+                        .addComponent(id))
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(actualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(apellidopa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ApellidoPa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(apellidoma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ApellidoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(crear))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(borrar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 570, 270));
 
-        tablausuarios.setBackground(new java.awt.Color(204, 204, 255));
-        tablausuarios.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        tablausuarios.setModel(new javax.swing.table.DefaultTableModel(
+        tablaUsuarios.setBackground(new java.awt.Color(204, 204, 255));
+        tablaUsuarios.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -225,45 +300,159 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
                 "Nombre", "ApellidoPa", "ApellidoMa", "Contraseña", "Rol", "Usuario", "Id"
             }
         ));
-        jScrollPane1.setViewportView(tablausuarios);
+        jScrollPane1.setViewportView(tablaUsuarios);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 270, 790, 200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void apellidopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidopaActionPerformed
+    private void ApellidoPaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoPaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_apellidopaActionPerformed
+    }//GEN-LAST:event_ApellidoPaActionPerformed
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
 
-    private void apellidomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidomaActionPerformed
+    private void ApellidoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoMaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_apellidomaActionPerformed
+    }//GEN-LAST:event_ApellidoMaActionPerformed
 
-    private void rolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolActionPerformed
+    private void RolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RolActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rolActionPerformed
+    }//GEN-LAST:event_RolActionPerformed
 
-    private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
+    private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuarioActionPerformed
+    }//GEN-LAST:event_UsuarioActionPerformed
 
-    private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
+    private void ContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContrasenaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_contraseñaActionPerformed
+    }//GEN-LAST:event_ContrasenaActionPerformed
+
+    private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
+        // TODO add your handling code here:
+        
+        UserDao userDao = new UserDao();
+      
+         
+        userDao.insertaRegistro(
+                 this.ApellidoMa.getText(),
+                this.ApellidoPa.getText(),
+                this.nombre.getText(),
+                Integer.parseInt(this.Rol.getText()), 
+                this.Usuario.getText(), 
+                this.Contrasena.getText());
+      
+         List<Usuario> usuarios=userDao.buscaUsuarios();
+        int row=0;
+        
+        for(Usuario usuario: usuarios){
+            tablaUsuarios.getModel().setValueAt(usuario.getNombre(), row, 0);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoPa(), row, 1);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoMa(), row, 2);
+            tablaUsuarios.getModel().setValueAt(usuario.getContrasena(), row, 3);
+            tablaUsuarios.getModel().setValueAt(usuario.getRolId(), row, 4);
+            tablaUsuarios.getModel().setValueAt(usuario.getUsuario(), row, 5);
+            tablaUsuarios.getModel().setValueAt(usuario.getIdUsuario(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaUsuarios.repaint();
+        this.tablaUsuarios.revalidate();
+    }//GEN-LAST:event_crearActionPerformed
+
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+        // TODO add your handling code here:
+        
+        UserDao userDao = new UserDao();
+      
+         
+        userDao.updateRegistro(
+                 this.ApellidoMa.getText(),
+                this.ApellidoPa.getText(),
+                this.nombre.getText(),
+                Integer.parseInt(this.Rol.getText()), 
+                this.Usuario.getText(), 
+                this.Contrasena.getText(),
+                Integer.parseInt(id.getText()));
+      
+         List<Usuario> usuarios=userDao.buscaUsuarios();
+        int row=0;
+        
+        for(Usuario usuario: usuarios){
+            tablaUsuarios.getModel().setValueAt(usuario.getNombre(), row, 0);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoPa(), row, 1);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoMa(), row, 2);
+            tablaUsuarios.getModel().setValueAt(usuario.getContrasena(), row, 3);
+            tablaUsuarios.getModel().setValueAt(usuario.getRolId(), row, 4);
+            tablaUsuarios.getModel().setValueAt(usuario.getUsuario(), row, 5);
+            tablaUsuarios.getModel().setValueAt(usuario.getIdUsuario(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaUsuarios.repaint();
+        this.tablaUsuarios.revalidate();
+    }//GEN-LAST:event_actualizarActionPerformed
+
+    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
+        // TODO add your handling code here:
+        
+         UserDao userDao = new UserDao();
+      
+         
+        userDao.deletRegistro(
+                Integer.parseInt(id.getText()));
+      
+        
+         DefaultTableModel dm = (DefaultTableModel) tablaUsuarios.getModel();
+int rowCount = dm.getRowCount();
+//Remove rows one by one from the end of the table
+for (int i = rowCount - 1; i >= 0; i--) {
+     tablaUsuarios.getModel().setValueAt("", i, 0);
+            tablaUsuarios.getModel().setValueAt("", i, 1);
+            tablaUsuarios.getModel().setValueAt("", i, 2);
+            tablaUsuarios.getModel().setValueAt("", i, 3);
+            tablaUsuarios.getModel().setValueAt("", i, 4);
+            tablaUsuarios.getModel().setValueAt("", i, 5);
+            tablaUsuarios.getModel().setValueAt("", i, 6);
+}
+        
+        
+         List<Usuario> usuarios=userDao.buscaUsuarios();
+         
+        int row=0;
+        
+        for(Usuario usuario: usuarios){
+            tablaUsuarios.getModel().setValueAt(usuario.getNombre(), row, 0);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoPa(), row, 1);
+            tablaUsuarios.getModel().setValueAt(usuario.getApellidoMa(), row, 2);
+            tablaUsuarios.getModel().setValueAt(usuario.getContrasena(), row, 3);
+            tablaUsuarios.getModel().setValueAt(usuario.getRolId(), row, 4);
+            tablaUsuarios.getModel().setValueAt(usuario.getUsuario(), row, 5);
+            tablaUsuarios.getModel().setValueAt(usuario.getIdUsuario(), row, 6);
+           
+            row++;
+        }
+
+        this.tablaUsuarios.repaint();
+        this.tablaUsuarios.revalidate();
+    }//GEN-LAST:event_borrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ApellidoMa;
+    private javax.swing.JTextField ApellidoPa;
+    private javax.swing.JTextField Contrasena;
+    private javax.swing.JTextField Rol;
+    private javax.swing.JTextField Usuario;
     private javax.swing.JButton actualizar;
-    private javax.swing.JTextField apellidoma;
-    private javax.swing.JTextField apellidopa;
     private javax.swing.JButton borrar;
-    private javax.swing.JTextField contraseña;
     private javax.swing.JButton crear;
+    private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -273,13 +462,10 @@ public class NewJInternalFrameUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField rol;
-    private javax.swing.JTable tablausuarios;
-    private javax.swing.JTextField usuario;
+    private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
 }
