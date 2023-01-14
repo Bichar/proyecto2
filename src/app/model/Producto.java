@@ -17,6 +17,8 @@ public class Producto {
     private String area;
     private String tipo;
     private String unidaMedida;
+    private String clave;
+    private String descripcion;
 
     public String getArea() {
         return area;
@@ -80,6 +82,23 @@ public class Producto {
     public String toString() {
         return idProducto + "-" + nombre ;
     }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     
     
     

@@ -12,6 +12,11 @@ public class Rol {
     
     private Integer rolId;
     private String nombreRol;
+    private String ocupacion;
+    private String diasdescanso;
+    private String colorident;
+    private String area;
+    
 
     public Integer getRolId() {
         return rolId;
@@ -28,5 +33,38 @@ public class Rol {
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
     }
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+
+    public String getDiasdescanso() {
+        return diasdescanso;
+    }
+
+    public void setDiasdescanso(String diasdescanso) {
+        this.diasdescanso = diasdescanso;
+    }
+
+    public String getColorident() {
+        return colorident;
+    }
+
+    public void setColorident(String colorident) {
+        this.colorident = colorident;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+    
     
 }

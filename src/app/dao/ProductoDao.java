@@ -43,6 +43,8 @@ public class ProductoDao {
               productoObj.setTipo(rs.getString("tipo"));
               productoObj.setUnidaMedida(rs.getString("unidadMedida"));
               productoObj.setIdProducto(rs.getInt("idproducto"));
+              productoObj.setClave(rs.getString("clave"));
+              productoObj.setDescripcion(rs.getString("descripcion"));
               productos.add(productoObj);
               
             }
@@ -54,7 +56,7 @@ public class ProductoDao {
          }
         return productos;
     }
-    public int insertaRegistro( String nombre, Integer precio, Integer cantidad, String area, String tipo, String unidadMedida){
+    public int insertaRegistro( String nombre, Integer precio, Integer cantidad, String area, String tipo, String unidadMedida, String clave, String descripcion){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -62,8 +64,8 @@ public class ProductoDao {
           
         try {
             PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`producto`\n" +
-                                                        "(`nombre`, `precio`,`cantidad`,`area`,`tipo`,`unidadMedida`) " +
-                                                        "VALUES ( ?,?,?,?,?,?)");
+                                                        "(`nombre`, `precio`,`cantidad`,`area`,`tipo`,`unidadMedida`,`clave`,`descripcion`) " +
+                                                        "VALUES ( ?,?,?,?,?,?,?,?)");
            
              ps.setString(1,nombre);
              ps.setInt(2,precio);
@@ -71,7 +73,8 @@ public class ProductoDao {
              ps.setString(4,area);
              ps.setString(5,tipo);
              ps.setString(6,unidadMedida);
-            
+             ps.setString(7,clave);
+             ps.setString(8,descripcion);
              
              ps.executeUpdate();
              ps.close();
@@ -84,7 +87,7 @@ public class ProductoDao {
     }
     
     
-    public int updateRegistro( String nombre, Integer precio, Integer cantidad, String area, String tipo, String unidadMedida, Integer idproducto){
+    public int updateRegistro( String nombre, Integer precio, Integer cantidad, String area, String tipo, String unidadMedida, String clave, String descripcion, Integer idproducto){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -100,6 +103,8 @@ public class ProductoDao {
                         "`area` = ? , " +
                         "`tipo` = ? , " +
                         "`unidadMedida` = ?  " +
+                        "`clave` = ?  " +
+                        "`descricpion` = ?  " +
                         "WHERE `idproducto` = ?");
            
             ps.setString(1,nombre);
@@ -108,7 +113,9 @@ public class ProductoDao {
              ps.setString(4,area);
              ps.setString(5,tipo);
              ps.setString(6,unidadMedida);
-             ps.setInt(7,idproducto);
+             ps.setString(7,clave);
+             ps.setString(8,descripcion);
+             ps.setInt(9,idproducto);
             
              
             resultado =  ps.executeUpdate();

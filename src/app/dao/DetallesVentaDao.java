@@ -42,6 +42,8 @@ public class DetallesVentaDao {
               detalleventaObj.setCantidadProducto(rs.getInt("CantidadPrducto"));
               detalleventaObj.setVentaId(rs.getInt("venta_id"));
               detalleventaObj.setIdProducto(rs.getInt("id_producto"));
+              detalleventaObj.setFechaventa(rs.getString("fechaventa"));
+              detalleventaObj.setNombrevende(rs.getString("nombrevende"));
                ventas.add(detalleventaObj);
             }
             st.close();
@@ -52,7 +54,7 @@ public class DetallesVentaDao {
          }
         return ventas;
     }
-    public int insertaRegistro( Integer Costototal, Integer CantidadProducto, Integer VentaId, Integer IdProducto){
+    public int insertaRegistro( Integer Costototal, Integer CantidadProducto, Integer VentaId, Integer IdProducto, String Fechaventa, String Nombrevende){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -60,14 +62,15 @@ public class DetallesVentaDao {
           
         try {
             PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`detallesventa`\n" +
-                                                        "(`Costototal`,`CantidadPrducto`,`venta_id`,`id_producto`) " +
-                                                        "VALUES ( ?,?,?,?)");
+                                                        "(`Costototal`,`CantidadPrducto`,`venta_id`,`id_producto`,`fechaventa`,`nombrevende`) " +
+                                                        "VALUES ( ?,?,?,?,?,?)");
            
              ps.setInt(1,Costototal);
              ps.setInt(2,CantidadProducto);
              ps.setInt(3,VentaId);
              ps.setInt(4,IdProducto);
-                        
+             ps.setString(5, Fechaventa);
+             ps.setString(6, Nombrevende);
              ps.executeUpdate();
              ps.close();
              con.close();
@@ -78,7 +81,7 @@ public class DetallesVentaDao {
         return resultado;
     }
     
-    public int updateRegistro( Integer Costototal, Integer cantidadproducto, Integer ventaid, Integer idproducto, Integer detalleid){
+    public int updateRegistro( Integer Costototal, Integer cantidadproducto, Integer ventaid, Integer idproducto, Integer detalleid, String Fechaventa, String Nombrevende){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -91,14 +94,19 @@ public class DetallesVentaDao {
                         "`Costototal` = ?," +
                         "`CantidadPrducto` = ?, " +
                         "`venta_id` = ?, " +
-                        "`id_producto` = ? " +
+                        "`id_producto` = ?, " +
+                        "`fechaventa` = ?, " +
+                        "`nombrevende` = ? " +
                         "WHERE `detalle_id` = ?");
            
              ps.setInt(1,Costototal);
              ps.setInt(2,cantidadproducto);
              ps.setInt(3,ventaid);
              ps.setInt(4,idproducto);
-             ps.setInt(5,detalleid);
+             ps.setString(5, Fechaventa);
+             ps.setString(6, Nombrevende);
+             ps.setInt(7,detalleid);
+             
  
             
              
@@ -113,7 +121,7 @@ public class DetallesVentaDao {
         return resultado;
     }
     
-    public int deletRegistro(Integer idUsuario){
+    public int deletRegistro(Integer Detalleid){
         Conexion conexion = new Conexion();
      Connection  con = conexion.getConexion();
      
@@ -124,7 +132,7 @@ public class DetallesVentaDao {
             PreparedStatement ps= con.prepareStatement("DELETE FROM `dbparadigmas`.`detallesventa` \n" +
                 "WHERE `detalle_id` = ? ");
            
-            ps.setInt(1,idUsuario);
+            ps.setInt(1,Detalleid);
               
             resultado =  ps.executeUpdate();
               ps.close();

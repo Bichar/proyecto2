@@ -15,6 +15,8 @@ public class Detalleventa {
     private Integer cantidadProducto;
     private Integer ventaId;
     private Integer idProducto;
+    private String fechaventa;
+    private String nombrevende;
 
     public Integer getDetalleId() {
         return detalleId;
@@ -55,6 +57,23 @@ public class Detalleventa {
     public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
     }
+
+    public String getFechaventa() {
+        return fechaventa;
+    }
+
+    public void setFechaventa(String fechaventa) {
+        this.fechaventa = fechaventa;
+    }
+
+    public String getNombrevende() {
+        return nombrevende;
+    }
+
+    public void setNombrevende(String nombrevende) {
+        this.nombrevende = nombrevende;
+    }
+    
     
     
 }

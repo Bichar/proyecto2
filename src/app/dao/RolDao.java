@@ -36,6 +36,10 @@ public class RolDao {
               Rol RolObj = new Rol();
               RolObj.setRolId(rs.getInt("rol_id"));
               RolObj.setNombreRol(rs.getString("nombrerol"));
+              RolObj.setOcupacion(rs.getString("ocupacion"));
+              RolObj.setDiasdescanso(rs.getString("diasdescanso"));
+              RolObj.setColorident(rs.getString("colorident"));
+              RolObj.setArea(rs.getString("area"));
                roles.add(RolObj);
             }
             st.close();
@@ -46,7 +50,7 @@ public class RolDao {
          }
         return roles;
     }
-    public int insertaRegistro( String nombreRol){
+    public int insertaRegistro( String nombreRol, String Ocupacion, String Diasdescanso, String Colorident, String Area){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -54,10 +58,14 @@ public class RolDao {
           
         try {
             PreparedStatement ps= con.prepareStatement("INSERT INTO `dbparadigmas`.`rol`\n" +
-                                                        "(`nombrerol`) " +
-                                                        "VALUES ( ?)");
+                                                        "(`nombrerol`,`ocupacion`,`diasdescanso`,`colorident`,`area`) " +
+                                                        "VALUES ( ?,?,?,?,?)");
            
              ps.setString(1,nombreRol);
+             ps.setString(2,Ocupacion);
+             ps.setString(3,Diasdescanso);
+             ps.setString(4,Colorident);
+             ps.setString(5,Area);
                          ps.executeUpdate();
              ps.close();
              con.close();
@@ -69,7 +77,7 @@ public class RolDao {
     }
     
     
-    public int updateRegistro( String nombreRol,Integer rolId){
+    public int updateRegistro( String nombreRol, String Ocupacion, String Diasdescanso, String Colorident, String Area,Integer rolId){
         Conexion conexion = new Conexion();
         Connection  con = conexion.getConexion();
      
@@ -79,11 +87,19 @@ public class RolDao {
         try {
             PreparedStatement ps= con.prepareStatement("UPDATE `dbparadigmas`.`rol`\n" +
                         "SET " +
-                         "`nombrerol` = ?  " +
+                         "`nombrerol` = ? , " +
+                         "`ocupacion` = ? , " +
+                         "`diasdescanso` = ? , " +
+                         "`colorident` = ? , " +
+                         "`area` = ?  " +
                         "WHERE `rol_id` = ?");
            
              ps.setString(1,nombreRol);
-             ps.setInt(2,rolId);
+             ps.setString(2,Ocupacion);
+             ps.setString(3,Diasdescanso);
+             ps.setString(4,Colorident);
+             ps.setString(5,Area);
+             ps.setInt(6,rolId);
             
              
             resultado =  ps.executeUpdate();
