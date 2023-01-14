@@ -36,6 +36,8 @@ public class ProductoDao {
             System.out.println("Conexión establecida.");
             while(rs.next()){
               Producto productoObj  = new Producto();
+              
+              productoObj.setCve(rs.getString("cve"));
               productoObj.setNombre(rs.getString("nombre"));
               productoObj.setPrecio(rs.getInt("precio"));
               productoObj.setCantidad(rs.getInt("cantidad"));
@@ -43,6 +45,8 @@ public class ProductoDao {
               productoObj.setTipo(rs.getString("tipo"));
               productoObj.setUnidaMedida(rs.getString("unidadMedida"));
               productoObj.setIdProducto(rs.getInt("idproducto"));
+              productoObj.setDescripcion(rs.getString("descripcion"));
+
               productos.add(productoObj);
               
             }
@@ -144,5 +148,62 @@ public class ProductoDao {
             Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE, null, ex);
          }
         return resultado;
+    }
+    
+    
+     public List<Producto> buscaProducto( String clave, String nombre, String tipo, String area){ 
+        Conexion conexion = new Conexion();
+        Connection  con = conexion.getConexion();
+        List<Producto> productos= new ArrayList<>();
+     
+         Statement st;
+        try {
+            st = con.createStatement();
+           
+            String query="SELECT * FROM dbparadigmas.producto where 1=1 ";
+            
+            
+            if( clave != null &&  !clave.trim().isEmpty()){
+                query += " and  cve like '%"+ clave +"%'";
+            }
+            
+            if(nombre != null &&!nombre.trim().isEmpty()){
+                query += " and  nombre like '%"+ nombre +"%'";
+            }
+            
+            if(tipo != null &&!tipo.trim().isEmpty()){
+                query += " and  tipo like '%"+ tipo +"%'";
+            }
+            
+            if(area != null && !area.trim().isEmpty()){
+                query += " and  area like '%"+ area +"%'";
+            }
+ 
+            
+            System.out.println("query: "+query);
+            
+            ResultSet rs = st.executeQuery(query);
+            
+            while(rs.next()){
+              Producto productoObj  = new Producto();
+              productoObj.setCve(rs.getString("cve"));
+              productoObj.setDescripcion(rs.getString("descripcion"));
+              productoObj.setNombre(rs.getString("nombre"));
+              productoObj.setPrecio(rs.getInt("precio"));
+              productoObj.setCantidad(rs.getInt("cantidad"));
+              productoObj.setArea(rs.getString("area"));
+              productoObj.setTipo(rs.getString("tipo"));
+              productoObj.setUnidaMedida(rs.getString("unidadMedida"));
+              productoObj.setIdProducto(rs.getInt("idproducto"));
+              productos.add(productoObj);
+              
+            }
+            st.close();
+            con.close();
+            
+            } catch (SQLException ex) {
+            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        return productos;
     }
 }

@@ -12,11 +12,13 @@ public class Producto {
     
     private Integer idProducto;
     private String nombre;
+    private String cve;
     private Integer precio;
     private Integer cantidad;
     private String area;
     private String tipo;
     private String unidaMedida;
+    private String descripcion;
 
     public String getArea() {
         return area;
@@ -75,6 +77,24 @@ public class Producto {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
+
+    public String getCve() {
+        return cve;
+    }
+
+    public void setCve(String cve) {
+        this.cve = cve;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
 
     @Override
     public String toString() {
